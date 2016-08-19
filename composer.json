@@ -1,0 +1,33 @@
+{
+  "name": "waredesk/waredesk-api",
+  "type": "library",
+  "description": "PHP Waredesk API",
+  "keywords": ["waredesk", "api", "wrapper"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gabriel Bull",
+      "email": "me@gabrielbull.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^6.2",
+    "php": "^7.1",
+    "psr/log": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Waredesk\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Waredesk\\Test\\": ["test/tests", "test/includes"]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
