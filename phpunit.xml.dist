@@ -22,6 +22,7 @@
         </whitelist>
     </filter>
     <php>
+        <env name="MOCK" value="1"/>
         <env name="API_URL" value="https://api.waredesk.com"/>
         <env name="CLIENT_ID" value=""/>
         <env name="CLIENT_SECRET" value=""/>

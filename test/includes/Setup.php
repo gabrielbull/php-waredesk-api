@@ -2,11 +2,12 @@
 
 namespace Waredesk\Test;
 
-use Waredesk\Waredesk;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
 
 class Setup
 {
-    public static function init(): Waredesk
+    public static function init(): array
     {
         $file = __DIR__ . '/../files/accessToken.txt';
         $accessToken = null;
@@ -16,8 +17,18 @@ class Setup
         $waredesk = \Waredesk\Setup::init($_ENV['CLIENT_ID'], $_ENV['CLIENT_SECRET'], $accessToken);
         $waredesk->setApiUrl($_ENV['API_URL']);
         if (!$accessToken) {
-            file_put_contents($file, $waredesk->getAccessToken());
+            if ($_ENV['MOCK'] == '1') {
+                $waredesk->setAccessToken('mock');
+            } else {
+                file_put_contents($file, $waredesk->getAccessToken());
+            }
         }
-        return $waredesk;
+        $mock = new MockHandler();
+        if ($_ENV['MOCK'] == '1') {
+            $handler = HandlerStack::create($mock);
+            $waredesk->setMockHandler($handler);
+        }
+
+        return [$mock, $waredesk];
     }
 }

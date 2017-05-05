@@ -3,6 +3,7 @@
 namespace Waredesk;
 
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
@@ -10,6 +11,7 @@ use Waredesk\Exceptions\UnknownException;
 
 class RequestHandler
 {
+    private $mockHandler;
     private $accessToken;
     private $apiUrl;
     private $client;
@@ -18,7 +20,7 @@ class RequestHandler
     {
         $this->accessToken = $accessToken;
         $this->apiUrl = $apiUrl;
-        $this->client = new Client(['base_uri' => $this->apiUrl . '/']);
+        $this->client = new Client(['base_uri' => $this->apiUrl, 'handler' => $this->mockHandler]);
     }
 
     public function getAccessToken(): string
@@ -26,7 +28,7 @@ class RequestHandler
         return $this->accessToken;
     }
 
-    public function setAccessToken(string $accessToken)
+    public function setAccessToken(string $accessToken = null)
     {
         $this->accessToken = $accessToken;
     }
@@ -39,7 +41,13 @@ class RequestHandler
     public function setApiUrl(string $apiUrl)
     {
         $this->apiUrl = $apiUrl;
-        $this->client = new Client(['base_uri' => $apiUrl . '/']);
+        $this->client = new Client(['base_uri' => $this->apiUrl, 'handler' => $this->mockHandler]);
+    }
+
+    public function setMockHandler(HandlerStack $mockHandler = null)
+    {
+        $this->mockHandler = $mockHandler;
+        $this->client = new Client(['base_uri' => $this->apiUrl, 'handler' => $this->mockHandler]);
     }
 
     private function handleBadResponse(ResponseInterface $response)

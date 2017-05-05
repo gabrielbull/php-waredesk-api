@@ -2,6 +2,8 @@
 
 namespace Waredesk;
 
+use GuzzleHttp\HandlerStack;
+
 class Waredesk
 {
     const PRODUCTION_API_URL = 'https://api.waredesk.com';
@@ -38,6 +40,26 @@ class Waredesk
         $this->requestHandler->setApiUrl($this->apiUrl);
     }
 
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId(string $clientId = null)
+    {
+        $this->clientId = $clientId;
+    }
+
+    public function getClientSecret(): string
+    {
+        return $this->clientSecret;
+    }
+
+    public function setClientSecret(string $clientSecret = null)
+    {
+        $this->clientSecret = $clientSecret;
+    }
+
     public function getAccessToken(): string
     {
         if (null !== $this->accessToken) {
@@ -56,9 +78,14 @@ class Waredesk
         return $this->accessToken;
     }
 
-    public function setAccessToken(string $accessToken)
+    public function setAccessToken(string $accessToken = null)
     {
         $this->accessToken = $accessToken;
         $this->requestHandler->setAccessToken($this->accessToken);
+    }
+
+    public function setMockHandler(HandlerStack $mockHandler = null)
+    {
+        $this->requestHandler->setMockHandler($mockHandler);
     }
 }
