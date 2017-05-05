@@ -25,7 +25,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Waredesk\\Test\\": ["test/tests", "test/includes"]
+      "Waredesk\\Tests\\": ["test/tests", "test/includes"]
     }
   },
   "minimum-stability": "dev",

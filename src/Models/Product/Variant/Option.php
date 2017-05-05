@@ -3,8 +3,9 @@
 namespace Waredesk\Models\Product\Variant;
 
 use DateTime;
+use JsonSerializable;
 
-class Option
+class Option implements JsonSerializable
 {
     private $id;
     private $label;
@@ -60,5 +61,13 @@ class Option
     public function setModificationDatetime(DateTime $modification_datetime)
     {
         $this->modification_datetime = $modification_datetime;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'label' => $this->getLabel(),
+            'value' => $this->getValue(),
+        ];
     }
 }

@@ -3,11 +3,12 @@
 namespace Waredesk\Models\Product;
 
 use DateTime;
+use JsonSerializable;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Options;
 use Waredesk\Collections\Products\Variants\Prices;
 
-class Variant
+class Variant implements JsonSerializable
 {
     private $id;
     private $images;
@@ -37,7 +38,7 @@ class Variant
         return $this->id;
     }
 
-    public function setId(int $id)
+    public function setId(int $id = null)
     {
         $this->id = $id;
     }
@@ -47,7 +48,7 @@ class Variant
         return $this->images;
     }
 
-    public function setImages(array $images)
+    public function setImages(array $images = null)
     {
         $this->images = $images;
     }
@@ -87,7 +88,7 @@ class Variant
         return $this->description;
     }
 
-    public function setDescription(string $description)
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
     }
@@ -97,7 +98,7 @@ class Variant
         return $this->notes;
     }
 
-    public function setNotes(string $notes)
+    public function setNotes(string $notes = null)
     {
         $this->notes = $notes;
     }
@@ -107,7 +108,7 @@ class Variant
         return $this->weight_unit;
     }
 
-    public function setWeightUnit(string $weight_unit)
+    public function setWeightUnit(string $weight_unit = null)
     {
         $this->weight_unit = $weight_unit;
     }
@@ -117,7 +118,7 @@ class Variant
         return $this->length_unit;
     }
 
-    public function setLengthUnit(string $length_unit)
+    public function setLengthUnit(string $length_unit = null)
     {
         $this->length_unit = $length_unit;
     }
@@ -127,7 +128,7 @@ class Variant
         return $this->weight;
     }
 
-    public function setWeight(float $weight)
+    public function setWeight(float $weight = null)
     {
         $this->weight = $weight;
     }
@@ -137,7 +138,7 @@ class Variant
         return $this->width;
     }
 
-    public function setWidth(float $width)
+    public function setWidth(float $width = null)
     {
         $this->width = $width;
     }
@@ -147,7 +148,7 @@ class Variant
         return $this->height;
     }
 
-    public function setHeight(float $height)
+    public function setHeight(float $height = null)
     {
         $this->height = $height;
     }
@@ -157,7 +158,7 @@ class Variant
         return $this->depth;
     }
 
-    public function setDepth(float $depth)
+    public function setDepth(float $depth = null)
     {
         $this->depth = $depth;
     }
@@ -167,7 +168,7 @@ class Variant
         return $this->creation_datetime;
     }
 
-    public function setCreationDatetime(DateTime $creation_datetime)
+    public function setCreationDatetime(DateTime $creation_datetime = null)
     {
         $this->creation_datetime = $creation_datetime;
     }
@@ -177,8 +178,29 @@ class Variant
         return $this->modification_datetime;
     }
 
-    public function setModificationDatetime(DateTime $modification_datetime)
+    public function setModificationDatetime(DateTime $modification_datetime = null)
     {
         $this->modification_datetime = $modification_datetime;
+    }
+
+    public function jsonSerialize()
+    {
+        $returnValue = [
+            'description' => $this->getDescription(),
+            'notes' => $this->getNotes(),
+            'options' => $this->getOptions()->jsonSerialize(),
+            'codes' => $this->getCodes()->jsonSerialize(),
+            'prices' => $this->getPrices()->jsonSerialize(),
+            'weight_unit' => $this->getWeightUnit(),
+            'length_unit' => $this->getLengthUnit(),
+            'weight' => $this->getWeight(),
+            'width' => $this->getWidth(),
+            'height' => $this->getHeight(),
+            'depth' => $this->getDepth(),
+        ];
+        //if ($this->getImages() instanceof NewImage) {
+        // $returnValue['image'] = base64($this->getNewImage());
+        // }
+        return $returnValue;
     }
 }

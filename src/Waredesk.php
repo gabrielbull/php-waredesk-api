@@ -26,7 +26,7 @@ class Waredesk
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->accessToken = $accessToken;
-        $this->products = new Products();
+        $this->products = new Products($this->requestHandler);
     }
 
     public function getApiUrl()

@@ -4,8 +4,9 @@ namespace Waredesk;
 
 use Iterator;
 use Countable;
+use JsonSerializable;
 
-class Collection implements Iterator, Countable
+abstract class Collection implements Iterator, Countable, JsonSerializable
 {
     protected $items;
     protected $key;
@@ -13,6 +14,18 @@ class Collection implements Iterator, Countable
     public function __construct(array $items = [])
     {
         $this->items = $items;
+    }
+
+    public function add($item)
+    {
+        $this->items[] = $item;
+    }
+
+    public function jsonSerialize()
+    {
+        return array_map(function (JsonSerializable $item) {
+            return $item->jsonSerialize();
+        }, $this->items);
     }
 
     public function count()

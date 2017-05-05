@@ -1,6 +1,6 @@
 <?php
 
-namespace Waredesk\Test;
+namespace Waredesk\Tests;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

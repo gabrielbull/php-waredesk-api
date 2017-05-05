@@ -5,6 +5,7 @@ namespace Waredesk;
 use Waredesk\Exceptions\AccountBannedException;
 use Waredesk\Exceptions\AccountDeletedException;
 use Waredesk\Exceptions\AccountInvalidException;
+use Waredesk\Exceptions\AuthenticationErrorException;
 use Waredesk\Exceptions\EmailNotConfirmedException;
 use Waredesk\Exceptions\InvalidClientException;
 use Waredesk\Exceptions\InvalidRequestException;
@@ -15,6 +16,8 @@ class ErrorHandler
     public function __invoke(array $error)
     {
         switch ($error['error']) {
+            case 'authentication_error':
+                throw new AuthenticationErrorException($error['message']);
             case 'invalid_request':
                 throw new InvalidRequestException($error['message']);
             case 'account_banned':

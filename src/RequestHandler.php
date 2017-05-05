@@ -70,9 +70,12 @@ class RequestHandler
     {
     }
 
-    public function post(string $endpoint, array $params = null, array $headers = []): array
+    public function post(string $endpoint, $params = null, array $headers = []): array
     {
         $headers['Content-Type'] = 'application/json';
+        if ($this->accessToken) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
         $body = null;
         if ($params) {
             $body = \GuzzleHttp\json_encode($params);

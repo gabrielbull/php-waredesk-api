@@ -4,8 +4,9 @@ namespace Waredesk\Models;
 
 use DateTime;
 use Waredesk\Collections\Products\Variants;
+use JsonSerializable;
 
-class Product
+class Product implements JsonSerializable
 {
     private $id;
     private $images;
@@ -26,7 +27,7 @@ class Product
         return $this->id;
     }
 
-    public function setId(int $id)
+    public function setId(int $id = null)
     {
         $this->id = $id;
     }
@@ -36,7 +37,7 @@ class Product
         return $this->images;
     }
 
-    public function setImages(array $images)
+    public function setImages(array $images = null)
     {
         $this->images = $images;
     }
@@ -56,7 +57,7 @@ class Product
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name = null)
     {
         $this->name = $name;
     }
@@ -66,7 +67,7 @@ class Product
         return $this->description;
     }
 
-    public function setDescription(string $description)
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
     }
@@ -76,7 +77,7 @@ class Product
         return $this->notes;
     }
 
-    public function setNotes(string $notes)
+    public function setNotes(string $notes = null)
     {
         $this->notes = $notes;
     }
@@ -86,7 +87,7 @@ class Product
         return $this->creation_datetime;
     }
 
-    public function setCreationDatetime(DateTime $creation_datetime)
+    public function setCreationDatetime(DateTime $creation_datetime = null)
     {
         $this->creation_datetime = $creation_datetime;
     }
@@ -96,8 +97,22 @@ class Product
         return $this->modification_datetime;
     }
 
-    public function setModificationDatetime(DateTime $modification_datetime)
+    public function setModificationDatetime(DateTime $modification_datetime = null)
     {
         $this->modification_datetime = $modification_datetime;
+    }
+
+    public function jsonSerialize()
+    {
+        $returnValue = [
+            'variants' => $this->getVariants()->jsonSerialize(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'notes' => $this->getNotes(),
+        ];
+        //if ($this->getImages() instanceof NewImage) {
+        // $returnValue['image'] = base64($this->getNewImage());
+        // }
+        return $returnValue;
     }
 }

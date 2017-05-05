@@ -3,8 +3,9 @@
 namespace Waredesk\Models\Product\Variant;
 
 use DateTime;
+use JsonSerializable;
 
-class Price
+class Price implements JsonSerializable
 {
     private $id;
     private $price_list_id;
@@ -71,5 +72,14 @@ class Price
     public function setModificationDatetime(DateTime $modification_datetime)
     {
         $this->modification_datetime = $modification_datetime;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'price_list_id' => $this->getPriceListId(),
+            'currency' => $this->getCurrency(),
+            'price' => $this->getPrice(),
+        ];
     }
 }

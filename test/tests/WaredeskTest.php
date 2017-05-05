@@ -2,30 +2,11 @@
 
 namespace Waredesk\Tests;
 
-use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
 use Waredesk\Exceptions\InvalidClientException;
-use Waredesk\Test\Setup;
-use Waredesk\Waredesk;
 
-class WaredeskTest extends TestCase
+class WaredeskTest extends BaseTest
 {
-    /**
-     * @var Waredesk
-     */
-    private $waredesk;
-
-    /**
-     * @var MockHandler
-     */
-    private $mock;
-
-    public function setUp()
-    {
-        [$this->mock, $this->waredesk] = Setup::init();
-    }
-
     public function testGetAccessToken()
     {
         $this->assertNotEmpty($this->waredesk->getAccessToken());

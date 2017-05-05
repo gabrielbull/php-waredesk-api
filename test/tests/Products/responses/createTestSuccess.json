@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "images": null,
+  "variants": [
+    {
+      "id": 34,
+      "images": null,
+      "options": [],
+      "codes": [],
+      "prices": [],
+      "description": "X-Large",
+      "notes": "",
+      "weight_unit": "imperial",
+      "length_unit": "imperial",
+      "weight": null,
+      "height": null,
+      "depth": null,
+      "width": null,
+      "creation_datetime": "Fri May 05 2017 16:14:38 -0400",
+      "modification_datetime": "Fri May 05 2017 16:14:38 -0400"
+    }
+  ],
+  "name": "Amazing T-Shirt",
+  "description": "This T-Shirt will cover your belly",
+  "notes": "",
+  "creation_datetime": "Fri May 05 2017 16:14:38 -0400",
+  "modification_datetime": "Fri May 05 2017 16:14:38 -0400"
+}
