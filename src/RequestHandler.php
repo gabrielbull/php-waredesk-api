@@ -53,7 +53,7 @@ class RequestHandler
     private function handleBadResponse(ResponseInterface $response = null)
     {
         if ($response) {
-            $body = (string) $response->getBody();
+            $body = (string)$response->getBody();
             $json = \GuzzleHttp\json_decode($body, true);
             (new ErrorHandler())($json);
             return;

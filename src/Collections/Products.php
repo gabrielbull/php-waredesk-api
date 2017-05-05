@@ -2,6 +2,8 @@
 
 namespace Waredesk\Collections;
 
-class Products
+use Waredesk\Collection;
+
+class Products extends Collection
 {
 }
