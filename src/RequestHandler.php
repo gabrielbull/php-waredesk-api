@@ -50,11 +50,15 @@ class RequestHandler
         $this->client = new Client(['base_uri' => $this->apiUrl, 'handler' => $this->mockHandler]);
     }
 
-    private function handleBadResponse(ResponseInterface $response)
+    private function handleBadResponse(ResponseInterface $response = null)
     {
-        $body = (string) $response->getBody();
-        $json = \GuzzleHttp\json_decode($body, true);
-        ErrorHandler::error($json);
+        if ($response) {
+            $body = (string) $response->getBody();
+            $json = \GuzzleHttp\json_decode($body, true);
+            ErrorHandler::error($json);
+            return;
+        }
+        throw new UnknownException();
     }
 
     private function handleException(ClientException $exception)
@@ -70,7 +74,9 @@ class RequestHandler
     {
         $headers['Content-Type'] = 'application/json';
         $body = null;
-        if ($params) $body = \GuzzleHttp\json_encode($params);
+        if ($params) {
+            $body = \GuzzleHttp\json_encode($params);
+        }
         $request = new GuzzleRequest('POST', $endpoint, $headers, $body);
 
         try {

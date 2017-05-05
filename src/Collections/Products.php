@@ -4,5 +4,4 @@ namespace Waredesk\Collections;
 
 class Products
 {
-
 }

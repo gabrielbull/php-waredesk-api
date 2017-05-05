@@ -8,6 +8,5 @@ class Products
 {
     public function create(Product $product)
     {
-
     }
 }

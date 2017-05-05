@@ -14,13 +14,19 @@ class ErrorHandler
 {
     public static function error(array $error)
     {
-        switch($error['error']) {
-            case 'invalid_request': throw new InvalidRequestException($error['message']);
-            case 'account_banned': throw new AccountBannedException($error['message']);
-            case 'account_deleted': throw new AccountDeletedException($error['message']);
-            case 'account_invalid': throw new AccountInvalidException($error['message']);
-            case 'email_not_confirmed': throw new EmailNotConfirmedException($error['message']);
-            case 'invalid_client': throw new InvalidClientException($error['message']);
+        switch ($error['error']) {
+            case 'invalid_request':
+                throw new InvalidRequestException($error['message']);
+            case 'account_banned':
+                throw new AccountBannedException($error['message']);
+            case 'account_deleted':
+                throw new AccountDeletedException($error['message']);
+            case 'account_invalid':
+                throw new AccountInvalidException($error['message']);
+            case 'email_not_confirmed':
+                throw new EmailNotConfirmedException($error['message']);
+            case 'invalid_client':
+                throw new InvalidClientException($error['message']);
         }
         throw new UnknownException();
     }

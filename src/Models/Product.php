@@ -4,5 +4,4 @@ namespace Waredesk\Models;
 
 class Product
 {
-
 }
