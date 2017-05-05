@@ -55,7 +55,7 @@ class RequestHandler
         if ($response) {
             $body = (string) $response->getBody();
             $json = \GuzzleHttp\json_decode($body, true);
-            ErrorHandler::error($json);
+            (new ErrorHandler())($json);
             return;
         }
         throw new UnknownException();
@@ -83,9 +83,8 @@ class RequestHandler
             $response = $this->client->send($request);
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
                 return \GuzzleHttp\json_decode((string)$response->getBody(), true);
-            } else {
-                $this->handleBadResponse($response);
             }
+            $this->handleBadResponse($response);
         } catch (ClientException $e) {
             $this->handleException($e);
         }

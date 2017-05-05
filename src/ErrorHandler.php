@@ -12,7 +12,7 @@ use Waredesk\Exceptions\UnknownException;
 
 class ErrorHandler
 {
-    public static function error(array $error)
+    public function __invoke(array $error)
     {
         switch ($error['error']) {
             case 'invalid_request':
