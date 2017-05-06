@@ -73,7 +73,7 @@ class RequestHandler
     public function post(string $endpoint, $params = null, array $headers = []): array
     {
         $headers['Content-Type'] = 'application/json';
-        if ($this->accessToken) {
+        if ($this->accessToken !== null) {
             $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
         $body = null;
