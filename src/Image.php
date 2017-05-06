@@ -57,4 +57,9 @@ class Image
     {
         return $this->type;
     }
+
+    public function toBase64()
+    {
+        return base64_encode($this->content);
+    }
 }

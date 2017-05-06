@@ -21,6 +21,11 @@ abstract class Collection implements Iterator, Countable, JsonSerializable
         $this->items[] = $item;
     }
 
+    public function first()
+    {
+        return isset($this->items[0]) ? $this->items[0] : null;
+    }
+
     public function jsonSerialize()
     {
         return array_map(function (JsonSerializable $item) {

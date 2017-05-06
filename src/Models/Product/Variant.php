@@ -7,6 +7,7 @@ use JsonSerializable;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Options;
 use Waredesk\Collections\Products\Variants\Prices;
+use Waredesk\Image;
 
 class Variant implements JsonSerializable
 {
@@ -25,6 +26,11 @@ class Variant implements JsonSerializable
     private $depth;
     private $creation_datetime;
     private $modification_datetime;
+
+    /**
+     * @var Image
+     */
+    private $pendingImage;
 
     public function __construct()
     {
@@ -50,7 +56,13 @@ class Variant implements JsonSerializable
 
     public function setImages(array $images = null)
     {
+        $this->pendingImage = null;
         $this->images = $images;
+    }
+
+    public function setImage(Image $image = null)
+    {
+        $this->pendingImage = $image;
     }
 
     public function getOptions(): ?Options
@@ -198,9 +210,9 @@ class Variant implements JsonSerializable
             'height' => $this->getHeight(),
             'depth' => $this->getDepth(),
         ];
-        //if ($this->getImages() instanceof NewImage) {
-        // $returnValue['image'] = base64($this->getNewImage());
-        // }
+        if ($this->pendingImage) {
+            $returnValue['image'] = $this->pendingImage->toBase64();
+        }
         return $returnValue;
     }
 }

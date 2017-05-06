@@ -74,7 +74,7 @@ class RequestHandler
     {
         $headers['Content-Type'] = 'application/json';
         if ($this->accessToken !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+            $headers['Authorization'] = 'Bearer '.$this->accessToken;
         }
         $body = null;
         if ($params) {

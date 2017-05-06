@@ -5,6 +5,7 @@ namespace Waredesk\Models;
 use DateTime;
 use Waredesk\Collections\Products\Variants;
 use JsonSerializable;
+use Waredesk\Image;
 
 class Product implements JsonSerializable
 {
@@ -16,6 +17,11 @@ class Product implements JsonSerializable
     private $notes;
     private $creation_datetime;
     private $modification_datetime;
+
+    /**
+     * @var Image
+     */
+    private $pendingImage;
 
     public function __construct()
     {
@@ -39,7 +45,13 @@ class Product implements JsonSerializable
 
     public function setImages(array $images = null)
     {
+        $this->pendingImage = null;
         $this->images = $images;
+    }
+
+    public function setImage(Image $image = null)
+    {
+        $this->pendingImage = $image;
     }
 
     public function getVariants(): ?Variants
@@ -110,9 +122,9 @@ class Product implements JsonSerializable
             'description' => $this->getDescription(),
             'notes' => $this->getNotes(),
         ];
-        //if ($this->getImages() instanceof NewImage) {
-        // $returnValue['image'] = base64($this->getNewImage());
-        // }
+        if ($this->pendingImage) {
+            $returnValue['image'] = $this->pendingImage->toBase64();
+        }
         return $returnValue;
     }
 }
