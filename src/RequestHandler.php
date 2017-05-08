@@ -16,16 +16,59 @@ class RequestHandler
     private $accessToken;
     private $apiUrl;
     private $client;
+    private $clientId;
+    private $clientSecret;
+    private $disabledAuthentication = false;
 
-    public function __construct(string $accessToken = null, string $apiUrl = null)
+    public function __construct(string $clientId, string $clientSecret, string $accessToken = null, string $apiUrl = null)
     {
+        $this->clientId = $clientId;
+        $this->clientSecret = $clientSecret;
         $this->accessToken = $accessToken;
         $this->apiUrl = $apiUrl;
         $this->client = new Client(['base_uri' => $this->apiUrl, 'handler' => $this->mockHandler]);
     }
 
+    public function disabledAuthentication()
+    {
+        $this->disabledAuthentication = true;
+    }
+
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId(string $clientId = null)
+    {
+        $this->clientId = $clientId;
+    }
+
+    public function getClientSecret(): string
+    {
+        return $this->clientSecret;
+    }
+
+    public function setClientSecret(string $clientSecret = null)
+    {
+        $this->clientSecret = $clientSecret;
+    }
+
     public function getAccessToken(): string
     {
+        if (null !== $this->accessToken) {
+            return $this->accessToken;
+        }
+        $this->disabledAuthentication();
+        $response = $this->post(
+            '/v1/authorize',
+            [
+                'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret,
+                'grant_type' => 'client_credentials'
+            ]
+        );
+        $this->accessToken = $response['access_token'];
         return $this->accessToken;
     }
 
@@ -70,9 +113,13 @@ class RequestHandler
     private function enhanceHeaders(array $headers = []): array
     {
         $headers['Content-Type'] = 'application/json';
-        if ($this->accessToken !== null) {
-            $headers['Authorization'] = 'Bearer '.$this->accessToken;
+        if (!$this->disabledAuthentication) {
+            $accessToken = $this->getAccessToken();
+            if ($accessToken !== null) {
+                $headers['Authorization'] = 'Bearer '.$accessToken;
+            }
         }
+        $this->disabledAuthentication = false;
         return $headers;
     }
 
