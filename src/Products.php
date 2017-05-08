@@ -3,6 +3,7 @@
 namespace Waredesk;
 
 use Waredesk\Mappers\ProductMapper;
+use Waredesk\Mappers\ProductsMapper;
 use Waredesk\Models\Product;
 
 class Products
@@ -22,5 +23,11 @@ class Products
         );
         $product = (new ProductMapper())->map($product, $response);
         return $product;
+    }
+
+    public function fetch(): Collections\Products
+    {
+        $response = $this->requestHandler->get('/v1/products');
+        return (new ProductsMapper())->map(new Collections\Products(), $response);
     }
 }

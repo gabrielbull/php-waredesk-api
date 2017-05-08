@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 use Waredesk\Exceptions\UnknownException;
 
@@ -66,22 +67,26 @@ class RequestHandler
         $this->handleBadResponse($exception->getResponse());
     }
 
-    public function get(string $endpoint, array $headers = [], array $params = null)
-    {
-    }
-
-    public function post(string $endpoint, $params = null, array $headers = []): array
+    private function enhanceHeaders(array $headers = []): array
     {
         $headers['Content-Type'] = 'application/json';
         if ($this->accessToken !== null) {
             $headers['Authorization'] = 'Bearer '.$this->accessToken;
         }
+        return $headers;
+    }
+
+    private function encodeParams($params = null): ?string
+    {
         $body = null;
         if ($params) {
             $body = \GuzzleHttp\json_encode($params);
         }
-        $request = new GuzzleRequest('POST', $endpoint, $headers, $body);
+        return $body;
+    }
 
+    private function request(Request $request): array
+    {
         try {
             $response = $this->client->send($request);
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
@@ -92,5 +97,29 @@ class RequestHandler
             $this->handleException($e);
         }
         throw new UnknownException();
+    }
+
+    public function get(string $endpoint, array $headers = [], array $params = null): array
+    {
+        return $this->request(
+            new GuzzleRequest(
+                'GET',
+                $endpoint,
+                $this->enhanceHeaders($headers),
+                $this->encodeParams($params)
+            )
+        );
+    }
+
+    public function post(string $endpoint, $params = null, array $headers = []): array
+    {
+        return $this->request(
+            new GuzzleRequest(
+                'POST',
+                $endpoint,
+                $this->enhanceHeaders($headers),
+                $this->encodeParams($params)
+            )
+        );
     }
 }
