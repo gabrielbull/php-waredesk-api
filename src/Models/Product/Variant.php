@@ -16,6 +16,7 @@ class Variant implements JsonSerializable
     private $options;
     private $codes;
     private $prices;
+    private $name;
     private $description;
     private $notes;
     private $weight_unit;
@@ -67,6 +68,11 @@ class Variant implements JsonSerializable
     public function getPrices(): ?Prices
     {
         return $this->prices;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 
     public function getDescription(): ?string
@@ -141,6 +147,9 @@ class Variant implements JsonSerializable
                     case 'prices':
                         $this->prices = $value;
                         break;
+                    case 'name':
+                        $this->name = $value;
+                        break;
                     case 'description':
                         $this->description = $value;
                         break;
@@ -186,6 +195,11 @@ class Variant implements JsonSerializable
         $this->pendingImage = $image;
     }
 
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
     public function setDescription(string $description = null)
     {
         $this->description = $description;
@@ -229,6 +243,7 @@ class Variant implements JsonSerializable
     public function jsonSerialize()
     {
         $returnValue = [
+            'name' => $this->getName(),
             'description' => $this->getDescription(),
             'notes' => $this->getNotes(),
             'options' => $this->getOptions()->jsonSerialize(),
