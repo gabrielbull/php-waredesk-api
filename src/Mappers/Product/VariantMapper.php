@@ -15,55 +15,45 @@ class VariantMapper
 {
     public function map(Variant $variant, $data): Variant
     {
+        $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
                 case 'id':
-                    $variant->setId((int)$value);
-                    break;
-                case 'images':
-                    $variant->setImages($value);
+                    $finalData['id'] = (int)$value;
                     break;
                 case 'options':
-                    $variant->setOptions((new OptionsMapper())->map(new Options(), $value));
+                    $finalData['options'] = (new OptionsMapper())->map(new Options(), $value);
                     break;
                 case 'codes':
-                    $variant->setCodes((new CodesMapper())->map(new Codes(), $value));
+                    $finalData['codes'] = (new CodesMapper())->map(new Codes(), $value);
                     break;
                 case 'prices':
-                    $variant->setPrices((new PricesMapper())->map(new Prices(), $value));
-                    break;
-                case 'description':
-                    $variant->setDescription($value);
-                    break;
-                case 'notes':
-                    $variant->setNotes($value);
-                    break;
-                case 'weight_unit':
-                    $variant->setWeightUnit($value);
-                    break;
-                case 'length_unit':
-                    $variant->setLengthUnit($value);
+                    $finalData['prices'] = (new PricesMapper())->map(new Prices(), $value);
                     break;
                 case 'weight':
-                    $variant->setWeight((float)$value);
+                    $finalData['weight'] = (float)$value;
                     break;
                 case 'height':
-                    $variant->setHeight((float)$value);
+                    $finalData['height'] = (float)$value;
                     break;
                 case 'depth':
-                    $variant->setDepth((float)$value);
+                    $finalData['depth'] = (float)$value;
                     break;
                 case 'width':
-                    $variant->setWidth((float)$value);
+                    $finalData['width'] = (float)$value;
                     break;
                 case 'creation_datetime':
-                    $variant->setCreationDatetime(new DateTime($value));
+                    $finalData['creation_datetime'] = new DateTime($value);
                     break;
                 case 'modification_datetime':
-                    $variant->setModificationDatetime(new DateTime($value));
+                    $finalData['modification_datetime'] = new DateTime($value);
+                    break;
+                default:
+                    $finalData[$key] = $value;
                     break;
             }
         }
+        $variant->reset($finalData);
         return $variant;
     }
 }

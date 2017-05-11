@@ -10,28 +10,30 @@ class PriceMapper
 {
     public function map(Price $price, $data): Price
     {
+        $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
                 case 'id':
-                    $price->setId((int)$value);
+                    $finalData['id'] = (int)$value;
                     break;
                 case 'price_list_id':
-                    $price->setPriceListId((int)$value);
+                    $finalData['price_list_id'] = (int)$value;
                     break;
                 case 'currency':
-                    $price->setCurrency($value);
+                    $finalData['value'] = $value;
                     break;
                 case 'price':
-                    $price->setPrice((int)$value);
+                    $finalData['price'] = (int)$value;
                     break;
                 case 'creation_datetime':
-                    $price->setCreationDatetime(new DateTime($value));
+                    $finalData['creation_datetime'] = new DateTime($value);
                     break;
                 case 'modification_datetime':
-                    $price->setModificationDatetime(new DateTime($value));
+                    $finalData['modification_datetime'] = new DateTime($value);
                     break;
             }
         }
+        $price->reset($finalData);
         return $price;
     }
 }

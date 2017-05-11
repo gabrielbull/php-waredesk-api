@@ -16,6 +16,11 @@ abstract class Collection implements Iterator, Countable, JsonSerializable
         $this->items = $items;
     }
 
+    public function replace(array $items = [])
+    {
+        $this->items = $items;
+    }
+
     public function add($item)
     {
         $this->items[] = $item;

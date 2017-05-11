@@ -9,25 +9,27 @@ class CodeMapper
 {
     public function map(Code $code, $data): Code
     {
+        $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
                 case 'id':
-                    $code->setId((int)$value);
+                    $finalData['id'] = (int)$value;
                     break;
                 case 'label':
-                    $code->setLabel($value);
+                    $finalData['label'] = $value;
                     break;
                 case 'value':
-                    $code->setValue($value);
+                    $finalData['value'] = $value;
                     break;
                 case 'creation_datetime':
-                    $code->setCreationDatetime(new DateTime($value));
+                    $finalData['creation_datetime'] = new DateTime($value);
                     break;
                 case 'modification_datetime':
-                    $code->setModificationDatetime(new DateTime($value));
+                    $finalData['modification_datetime'] = new DateTime($value);
                     break;
             }
         }
+        $code->reset($finalData);
         return $code;
     }
 }

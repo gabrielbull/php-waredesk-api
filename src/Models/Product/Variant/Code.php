@@ -18,19 +18,9 @@ class Code implements JsonSerializable
         return $this->id;
     }
 
-    public function setId(int $id)
-    {
-        $this->id = $id;
-    }
-
     public function getLabel(): ?string
     {
         return $this->label;
-    }
-
-    public function setLabel(string $label)
-    {
-        $this->label = $label;
     }
 
     public function getValue(): ?string
@@ -38,19 +28,9 @@ class Code implements JsonSerializable
         return $this->value;
     }
 
-    public function setValue(string $value)
-    {
-        $this->value = $value;
-    }
-
     public function getCreationDatetime(): ?DateTime
     {
         return $this->creation_datetime;
-    }
-
-    public function setCreationDatetime(DateTime $creation_datetime)
-    {
-        $this->creation_datetime = $creation_datetime;
     }
 
     public function getModificationDatetime(): ?DateTime
@@ -58,9 +38,39 @@ class Code implements JsonSerializable
         return $this->modification_datetime;
     }
 
-    public function setModificationDatetime(DateTime $modification_datetime)
+    public function reset(array $data = null)
     {
-        $this->modification_datetime = $modification_datetime;
+        if ($data) {
+            foreach ($data as $key => $value) {
+                switch ($key) {
+                    case 'id':
+                        $this->id = $value;
+                        break;
+                    case 'label':
+                        $this->label = $value;
+                        break;
+                    case 'value':
+                        $this->value = $value;
+                        break;
+                    case 'creation_datetime':
+                        $this->creation_datetime = $value;
+                        break;
+                    case 'modification_datetime':
+                        $this->modification_datetime = $value;
+                        break;
+                }
+            }
+        }
+    }
+
+    public function setLabel(string $label)
+    {
+        $this->label = $label;
+    }
+
+    public function setValue(string $value)
+    {
+        $this->value = $value;
     }
 
     public function jsonSerialize()

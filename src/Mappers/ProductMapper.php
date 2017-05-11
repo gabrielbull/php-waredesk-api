@@ -11,34 +11,27 @@ class ProductMapper
 {
     public function map(Product $product, array $data): Product
     {
+        $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
                 case 'id':
-                    $product->setId((int)$value);
-                    break;
-                case 'images':
-                    $product->setImages($value);
+                    $finalData['id'] = (int)$value;
                     break;
                 case 'variants':
-                    $product->setVariants((new VariantsMapper())->map(new Variants(), $value));
-                    break;
-                case 'name':
-                    $product->setName($value);
-                    break;
-                case 'description':
-                    $product->setDescription($value);
-                    break;
-                case 'notes':
-                    $product->setNotes($value);
+                    $finalData['variants'] = (new VariantsMapper())->map(new Variants(), $value);
                     break;
                 case 'creation_datetime':
-                    $product->setCreationDatetime(new DateTime($value));
+                    $finalData['creation_datetime'] = new DateTime($value);
                     break;
                 case 'modification_datetime':
-                    $product->setModificationDatetime(new DateTime($value));
+                    $finalData['modification_datetime'] = new DateTime($value);
+                    break;
+                default:
+                    $finalData[$key] = $value;
                     break;
             }
         }
+        $product->reset($finalData);
         return $product;
     }
 }

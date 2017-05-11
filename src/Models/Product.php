@@ -23,9 +23,15 @@ class Product implements JsonSerializable
      */
     private $pendingImage;
 
-    public function __construct()
+    /**
+     * @var bool
+     */
+    private $deleteImage;
+
+    public function __construct(array $data = null)
     {
         $this->variants = new Variants();
+        $this->reset($data);
     }
 
     public function getId(): ?int
@@ -33,25 +39,9 @@ class Product implements JsonSerializable
         return $this->id;
     }
 
-    public function setId(int $id = null)
-    {
-        $this->id = $id;
-    }
-
     public function getImages(): ?array
     {
         return $this->images;
-    }
-
-    public function setImages(array $images = null)
-    {
-        $this->pendingImage = null;
-        $this->images = $images;
-    }
-
-    public function setImage(Image $image = null)
-    {
-        $this->pendingImage = $image;
     }
 
     public function getVariants(): ?Variants
@@ -59,19 +49,9 @@ class Product implements JsonSerializable
         return $this->variants;
     }
 
-    public function setVariants(Variants $variants)
-    {
-        $this->variants = $variants;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function setName(string $name = null)
-    {
-        $this->name = $name;
     }
 
     public function getDescription(): ?string
@@ -79,19 +59,9 @@ class Product implements JsonSerializable
         return $this->description;
     }
 
-    public function setDescription(string $description = null)
-    {
-        $this->description = $description;
-    }
-
     public function getNotes(): ?string
     {
         return $this->notes;
-    }
-
-    public function setNotes(string $notes = null)
-    {
-        $this->notes = $notes;
     }
 
     public function getCreationDatetime(): ?DateTime
@@ -99,19 +69,70 @@ class Product implements JsonSerializable
         return $this->creation_datetime;
     }
 
-    public function setCreationDatetime(DateTime $creation_datetime = null)
-    {
-        $this->creation_datetime = $creation_datetime;
-    }
-
     public function getModificationDatetime(): ?DateTime
     {
         return $this->modification_datetime;
     }
 
-    public function setModificationDatetime(DateTime $modification_datetime = null)
+    public function reset(array $data = null)
     {
-        $this->modification_datetime = $modification_datetime;
+        if ($data) {
+            foreach ($data as $key => $value) {
+                switch ($key) {
+                    case 'id':
+                        $this->id = $value;
+                        break;
+                    case 'images':
+                        $this->deleteImage = false;
+                        $this->pendingImage = null;
+                        $this->images = $value;
+                        break;
+                    case 'variants':
+                        $this->variants = $value;
+                        break;
+                    case 'name':
+                        $this->name = $value;
+                        break;
+                    case 'description':
+                        $this->description = $value;
+                        break;
+                    case 'notes':
+                        $this->notes = $value;
+                        break;
+                    case 'creation_datetime':
+                        $this->creation_datetime = $value;
+                        break;
+                    case 'modification_datetime':
+                        $this->modification_datetime = $value;
+                        break;
+                }
+            }
+        }
+    }
+
+    public function deleteImage()
+    {
+        $this->deleteImage = true;
+    }
+
+    public function setImage(Image $image = null)
+    {
+        $this->pendingImage = $image;
+    }
+
+    public function setName(string $name = null)
+    {
+        $this->name = $name;
+    }
+
+    public function setDescription(string $description = null)
+    {
+        $this->description = $description;
+    }
+
+    public function setNotes(string $notes = null)
+    {
+        $this->notes = $notes;
     }
 
     public function jsonSerialize()
@@ -124,6 +145,8 @@ class Product implements JsonSerializable
         ];
         if ($this->pendingImage) {
             $returnValue['image'] = $this->pendingImage->toBase64();
+        } else if ($this->deleteImage) {
+            $returnValue['image'] = null;
         }
         return $returnValue;
     }
