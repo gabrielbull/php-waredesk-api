@@ -4,8 +4,8 @@ namespace Waredesk\Models\Product;
 
 use DateTime;
 use JsonSerializable;
+use Waredesk\Collections\Products\Variants\Annotations;
 use Waredesk\Collections\Products\Variants\Codes;
-use Waredesk\Collections\Products\Variants\Options;
 use Waredesk\Collections\Products\Variants\Prices;
 use Waredesk\Image;
 
@@ -13,7 +13,7 @@ class Variant implements JsonSerializable
 {
     private $id;
     private $images;
-    private $options;
+    private $annotations;
     private $codes;
     private $prices;
     private $name;
@@ -25,8 +25,8 @@ class Variant implements JsonSerializable
     private $width;
     private $height;
     private $depth;
-    private $creation_datetime;
-    private $modification_datetime;
+    private $creation;
+    private $modification;
 
     /**
      * @var Image
@@ -40,89 +40,89 @@ class Variant implements JsonSerializable
 
     public function __construct()
     {
-        $this->options = new Options();
+        $this->annotations = new Annotations();
         $this->codes = new Codes();
         $this->prices = new Prices();
     }
 
-    public function getId(): ?int
+    public function getId(): ? string
     {
         return $this->id;
     }
 
-    public function getImages(): ?array
+    public function getImages(): ? array
     {
         return $this->images;
     }
 
-    public function getOptions(): ?Options
+    public function getAnnotations(): ? Annotations
     {
-        return $this->options;
+        return $this->annotations;
     }
 
-    public function getCodes(): ?Codes
+    public function getCodes(): ? Codes
     {
         return $this->codes;
     }
 
-    public function getPrices(): ?Prices
+    public function getPrices(): ? Prices
     {
         return $this->prices;
     }
 
-    public function getName(): ?string
+    public function getName(): ? string
     {
         return $this->name;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): ? string
     {
         return $this->description;
     }
 
-    public function getNotes(): ?string
+    public function getNotes(): ? string
     {
         return $this->notes;
     }
 
-    public function getWeightUnit(): ?string
+    public function getWeightUnit(): ? string
     {
         return $this->weight_unit;
     }
 
-    public function getLengthUnit(): ?string
+    public function getLengthUnit(): ? string
     {
         return $this->length_unit;
     }
 
-    public function getWeight(): ?float
+    public function getWeight(): ? float
     {
         return $this->weight;
     }
 
-    public function getWidth(): ?float
+    public function getWidth(): ? float
     {
         return $this->width;
     }
 
-    public function getHeight(): ?float
+    public function getHeight(): ? float
     {
         return $this->height;
     }
 
-    public function getDepth(): ?float
+    public function getDepth(): ? float
     {
         return $this->depth;
     }
 
-    public function getCreationDatetime(): ?DateTime
+    public function getCreation(): ? DateTime
     {
-        return $this->creation_datetime;
+        return $this->creation;
     }
 
-    public function getModificationDatetime(): ?DateTime
+    public function getModification(): ? DateTime
     {
-        return $this->modification_datetime;
+        return $this->modification;
     }
 
     public function reset(array $data = null)
@@ -138,8 +138,8 @@ class Variant implements JsonSerializable
                         $this->pendingImage = null;
                         $this->images = $value;
                         break;
-                    case 'options':
-                        $this->options = $value;
+                    case 'annotations':
+                        $this->annotations = $value;
                         break;
                     case 'codes':
                         $this->codes = $value;
@@ -174,11 +174,11 @@ class Variant implements JsonSerializable
                     case 'depth':
                         $this->depth = $value;
                         break;
-                    case 'creation_datetime':
-                        $this->creation_datetime = $value;
+                    case 'creation':
+                        $this->creation = $value;
                         break;
-                    case 'modification_datetime':
-                        $this->modification_datetime = $value;
+                    case 'modification':
+                        $this->modification = $value;
                         break;
                 }
             }
@@ -246,7 +246,7 @@ class Variant implements JsonSerializable
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'notes' => $this->getNotes(),
-            'options' => $this->getOptions()->jsonSerialize(),
+            'annotations' => $this->getAnnotations()->jsonSerialize(),
             'codes' => $this->getCodes()->jsonSerialize(),
             'prices' => $this->getPrices()->jsonSerialize(),
             'weight_unit' => $this->getWeightUnit(),

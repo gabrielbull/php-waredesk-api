@@ -14,17 +14,14 @@ class ProductMapper
         $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
-                case 'id':
-                    $finalData['id'] = (int)$value;
-                    break;
                 case 'variants':
                     $finalData['variants'] = (new VariantsMapper())->map(new Variants(), $value);
                     break;
-                case 'creation_datetime':
-                    $finalData['creation_datetime'] = new DateTime($value);
+                case 'creation':
+                    $finalData['creation'] = new DateTime($value);
                     break;
-                case 'modification_datetime':
-                    $finalData['modification_datetime'] = new DateTime($value);
+                case 'modification':
+                    $finalData['modification'] = new DateTime($value);
                     break;
                 default:
                     $finalData[$key] = $value;

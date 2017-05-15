@@ -3,6 +3,7 @@
 namespace Waredesk\Mappers\Product\Variant;
 
 use DateTime;
+use Waredesk\Collections\Products\Variants\Codes\Elements;
 use Waredesk\Models\Product\Variant\Code;
 
 class CodeMapper
@@ -12,20 +13,17 @@ class CodeMapper
         $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
-                case 'id':
-                    $finalData['id'] = (int)$value;
+                case 'elements':
+                    $finalData['elements'] = (new ElementsMapper())->map(new Elements(), $value);
                     break;
-                case 'label':
-                    $finalData['label'] = $value;
+                case 'creation':
+                    $finalData['creation'] = new DateTime($value);
                     break;
-                case 'value':
-                    $finalData['value'] = $value;
+                case 'modification':
+                    $finalData['modification'] = new DateTime($value);
                     break;
-                case 'creation_datetime':
-                    $finalData['creation_datetime'] = new DateTime($value);
-                    break;
-                case 'modification_datetime':
-                    $finalData['modification_datetime'] = new DateTime($value);
+                default:
+                    $finalData[$key] = $value;
                     break;
             }
         }

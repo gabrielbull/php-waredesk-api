@@ -4,38 +4,44 @@ namespace Waredesk\Models\Product\Variant;
 
 use DateTime;
 use JsonSerializable;
+use Waredesk\Collections\Products\Variants\Codes\Elements;
 
 class Code implements JsonSerializable
 {
     private $id;
-    private $label;
-    private $value;
-    private $creation_datetime;
-    private $modification_datetime;
+    private $name;
+    private $elements;
+    private $creation;
+    private $modification;
 
-    public function getId(): ?int
+    public function __construct()
+    {
+        $this->elements = new Elements();
+    }
+
+    public function getId(): ? string
     {
         return $this->id;
     }
 
-    public function getLabel(): ?string
+    public function getName(): ? string
     {
-        return $this->label;
+        return $this->name;
     }
 
-    public function getValue(): ?string
+    public function getElements(): ? Elements
     {
-        return $this->value;
+        return $this->elements;
     }
 
-    public function getCreationDatetime(): ?DateTime
+    public function getCreation(): ? DateTime
     {
-        return $this->creation_datetime;
+        return $this->creation;
     }
 
-    public function getModificationDatetime(): ?DateTime
+    public function getModification(): ? DateTime
     {
-        return $this->modification_datetime;
+        return $this->modification;
     }
 
     public function reset(array $data = null)
@@ -46,38 +52,28 @@ class Code implements JsonSerializable
                     case 'id':
                         $this->id = $value;
                         break;
-                    case 'label':
-                        $this->label = $value;
+                    case 'name':
+                        $this->name = $value;
                         break;
-                    case 'value':
-                        $this->value = $value;
+                    case 'elements':
+                        $this->elements = $value;
                         break;
-                    case 'creation_datetime':
-                        $this->creation_datetime = $value;
+                    case 'creation':
+                        $this->creation = $value;
                         break;
-                    case 'modification_datetime':
-                        $this->modification_datetime = $value;
+                    case 'modification':
+                        $this->modification = $value;
                         break;
                 }
             }
         }
     }
 
-    public function setLabel(string $label)
-    {
-        $this->label = $label;
-    }
-
-    public function setValue(string $value)
-    {
-        $this->value = $value;
-    }
-
     public function jsonSerialize()
     {
         return [
-            'label' => $this->getLabel(),
-            'value' => $this->getValue(),
+            'code' => $this->getId(),
+            'elements' => $this->getElements()->jsonSerialize(),
         ];
     }
 }

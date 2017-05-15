@@ -15,8 +15,8 @@ class Product implements JsonSerializable
     private $name;
     private $description;
     private $notes;
-    private $creation_datetime;
-    private $modification_datetime;
+    private $creation;
+    private $modification;
 
     /**
      * @var Image
@@ -34,44 +34,44 @@ class Product implements JsonSerializable
         $this->reset($data);
     }
 
-    public function getId(): ?int
+    public function getId(): ? string
     {
         return $this->id;
     }
 
-    public function getImages(): ?array
+    public function getImages(): ? array
     {
         return $this->images;
     }
 
-    public function getVariants(): ?Variants
+    public function getVariants(): ? Variants
     {
         return $this->variants;
     }
 
-    public function getName(): ?string
+    public function getName(): ? string
     {
         return $this->name;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): ? string
     {
         return $this->description;
     }
 
-    public function getNotes(): ?string
+    public function getNotes(): ? string
     {
         return $this->notes;
     }
 
-    public function getCreationDatetime(): ?DateTime
+    public function getCreation(): ?DateTime
     {
-        return $this->creation_datetime;
+        return $this->creation;
     }
 
-    public function getModificationDatetime(): ?DateTime
+    public function getModification(): ? DateTime
     {
-        return $this->modification_datetime;
+        return $this->modification;
     }
 
     public function reset(array $data = null)
@@ -99,11 +99,11 @@ class Product implements JsonSerializable
                     case 'notes':
                         $this->notes = $value;
                         break;
-                    case 'creation_datetime':
-                        $this->creation_datetime = $value;
+                    case 'creation':
+                        $this->creation = $value;
                         break;
-                    case 'modification_datetime':
-                        $this->modification_datetime = $value;
+                    case 'modification':
+                        $this->modification = $value;
                         break;
                 }
             }

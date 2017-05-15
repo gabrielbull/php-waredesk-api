@@ -4,6 +4,6 @@ namespace Waredesk\Collections\Products\Variants;
 
 use Waredesk\Collection;
 
-class Options extends Collection
+class Annotations extends Collection
 {
 }

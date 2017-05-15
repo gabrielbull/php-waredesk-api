@@ -5,37 +5,37 @@ namespace Waredesk\Models\Product\Variant;
 use DateTime;
 use JsonSerializable;
 
-class Option implements JsonSerializable
+class Annotation implements JsonSerializable
 {
     private $id;
     private $label;
     private $value;
-    private $creation_datetime;
-    private $modification_datetime;
+    private $creation;
+    private $modification;
 
-    public function getId(): ?int
+    public function getId(): ? string
     {
         return $this->id;
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): ? string
     {
         return $this->label;
     }
 
-    public function getValue(): ?string
+    public function getValue(): ? string
     {
         return $this->value;
     }
 
-    public function getCreationDatetime(): ?DateTime
+    public function getCreation(): ? DateTime
     {
-        return $this->creation_datetime;
+        return $this->creation;
     }
 
-    public function getModificationDatetime(): ?DateTime
+    public function getModification(): ? DateTime
     {
-        return $this->modification_datetime;
+        return $this->modification;
     }
 
 
@@ -53,11 +53,11 @@ class Option implements JsonSerializable
                     case 'value':
                         $this->value = $value;
                         break;
-                    case 'creation_datetime':
-                        $this->creation_datetime = $value;
+                    case 'creation':
+                        $this->creation = $value;
                         break;
-                    case 'modification_datetime':
-                        $this->modification_datetime = $value;
+                    case 'modification':
+                        $this->modification = $value;
                         break;
                 }
             }

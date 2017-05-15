@@ -3,9 +3,11 @@
 namespace Waredesk\Mappers\Product;
 
 use DateTime;
+use Waredesk\Collections\Products\Variants\Annotations;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Options;
 use Waredesk\Collections\Products\Variants\Prices;
+use Waredesk\Mappers\Product\Variant\AnnotationsMapper;
 use Waredesk\Mappers\Product\Variant\CodesMapper;
 use Waredesk\Mappers\Product\Variant\OptionsMapper;
 use Waredesk\Mappers\Product\Variant\PricesMapper;
@@ -18,11 +20,8 @@ class VariantMapper
         $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
-                case 'id':
-                    $finalData['id'] = (int)$value;
-                    break;
-                case 'options':
-                    $finalData['options'] = (new OptionsMapper())->map(new Options(), $value);
+                case 'annotations':
+                    $finalData['annotations'] = (new AnnotationsMapper())->map(new Annotations(), $value);
                     break;
                 case 'codes':
                     $finalData['codes'] = (new CodesMapper())->map(new Codes(), $value);
@@ -42,11 +41,11 @@ class VariantMapper
                 case 'width':
                     $finalData['width'] = (float)$value;
                     break;
-                case 'creation_datetime':
-                    $finalData['creation_datetime'] = new DateTime($value);
+                case 'creation':
+                    $finalData['creation'] = new DateTime($value);
                     break;
-                case 'modification_datetime':
-                    $finalData['modification_datetime'] = new DateTime($value);
+                case 'modification':
+                    $finalData['modification'] = new DateTime($value);
                     break;
                 default:
                     $finalData[$key] = $value;

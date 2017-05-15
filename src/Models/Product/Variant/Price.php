@@ -8,40 +8,40 @@ use JsonSerializable;
 class Price implements JsonSerializable
 {
     private $id;
-    private $price_list_id;
+    private $price_list;
     private $currency;
     private $price;
-    private $creation_datetime;
-    private $modification_datetime;
+    private $creation;
+    private $modification;
 
-    public function getId(): ?int
+    public function getId(): ? string
     {
         return $this->id;
     }
 
-    public function getPriceListId(): ?int
+    public function getPriceList(): ? string
     {
-        return $this->price_list_id;
+        return $this->price_list;
     }
 
-    public function getCurrency(): ?string
+    public function getCurrency(): ? string
     {
         return $this->currency;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ? int
     {
         return $this->price;
     }
 
-    public function getCreationDatetime(): ?DateTime
+    public function getCreation(): ? DateTime
     {
-        return $this->creation_datetime;
+        return $this->creation;
     }
 
-    public function getModificationDatetime(): ?DateTime
+    public function getModification(): ? DateTime
     {
-        return $this->modification_datetime;
+        return $this->modification;
     }
 
 
@@ -53,8 +53,8 @@ class Price implements JsonSerializable
                     case 'id':
                         $this->id = $value;
                         break;
-                    case 'price_list_id':
-                        $this->price_list_id = $value;
+                    case 'price_list':
+                        $this->price_list = $value;
                         break;
                     case 'currency':
                         $this->currency = $value;
@@ -62,20 +62,20 @@ class Price implements JsonSerializable
                     case 'price':
                         $this->price = $value;
                         break;
-                    case 'creation_datetime':
-                        $this->creation_datetime = $value;
+                    case 'creation':
+                        $this->creation = $value;
                         break;
-                    case 'modification_datetime':
-                        $this->modification_datetime = $value;
+                    case 'modification':
+                        $this->modification = $value;
                         break;
                 }
             }
         }
     }
 
-    public function setPriceList(int $price_list_id)
+    public function setPriceList(string $price_list)
     {
-        $this->price_list_id = $price_list_id;
+        $this->$price_list = $price_list;
     }
 
     public function setCurrency(string $currency)
@@ -91,7 +91,7 @@ class Price implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'price_list_id' => $this->getPriceListId(),
+            'price_list' => $this->getPriceList(),
             'currency' => $this->getCurrency(),
             'price' => $this->getPrice(),
         ];

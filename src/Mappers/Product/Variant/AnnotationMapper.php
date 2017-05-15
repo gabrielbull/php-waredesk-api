@@ -3,18 +3,15 @@
 namespace Waredesk\Mappers\Product\Variant;
 
 use DateTime;
-use Waredesk\Models\Product\Variant\Price;
+use Waredesk\Models\Product\Variant\Annotation;
 
-class PriceMapper
+class AnnotationMapper
 {
-    public function map(Price $price, $data): Price
+    public function map(Annotation $option, $data): Annotation
     {
         $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
-                case 'price':
-                    $finalData['price'] = (int)$value;
-                    break;
                 case 'creation':
                     $finalData['creation'] = new DateTime($value);
                     break;
@@ -26,7 +23,7 @@ class PriceMapper
                     break;
             }
         }
-        $price->reset($finalData);
-        return $price;
+        $option->reset($finalData);
+        return $option;
     }
 }
