@@ -26,6 +26,7 @@ class Waredesk
         $this->apiUrl = self::PRODUCTION_API_URL;
         $this->requestHandler = new RequestHandler($clientId, $clientSecret, $accessToken, $this->apiUrl);
         $this->products = new Products($this->requestHandler);
+        $this->codes = new Codes($this->requestHandler);
     }
 
     public function getApiUrl()
