@@ -16,7 +16,7 @@ class CreateTest extends BaseTest
         $product->setDescription('This T-Shirt will cover your belly');
 
         $variant = new Product\Variant();
-        $variant->setDescription('X-Large');
+        $variant->setName('X-Large');
         $product->getVariants()->add($variant);
 
         return $product;
