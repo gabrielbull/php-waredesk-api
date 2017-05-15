@@ -9,6 +9,11 @@ class Waredesk
     const PRODUCTION_API_URL = 'https://api.waredesk.com';
 
     /**
+     * @var Codes
+     */
+    public $codes;
+
+    /**
      * @var Products
      */
     public $products;
