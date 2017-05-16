@@ -25,6 +25,9 @@ class Products
         return $product;
     }
 
+    /**
+     * @return Collections\Products|Product[]
+     */
     public function fetch(): Collections\Products
     {
         $response = $this->requestHandler->get('/v1/products');

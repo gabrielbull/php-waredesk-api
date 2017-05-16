@@ -25,6 +25,9 @@ class Codes
         return $code;
     }
 
+    /**
+     * @return Collections\Codes|Code[]
+     */
     public function fetch(): Collections\Codes
     {
         $response = $this->requestHandler->get('/v1/codes');

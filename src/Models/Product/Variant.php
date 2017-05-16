@@ -258,7 +258,7 @@ class Variant implements JsonSerializable
         ];
         if ($this->pendingImage) {
             $returnValue['image'] = $this->pendingImage->toBase64();
-        } else if ($this->deleteImage) {
+        } elseif ($this->deleteImage) {
             $returnValue['image'] = null;
         }
         return $returnValue;

@@ -10,6 +10,9 @@ class Element implements JsonSerializable
     private $type;
     private $value;
     private $auto_increment;
+    private $pad_direction;
+    private $pad_char;
+    private $pad_length;
 
     public function getId(): ? string
     {
@@ -31,6 +34,21 @@ class Element implements JsonSerializable
         return $this->auto_increment;
     }
 
+    public function getPadDirection(): ? string
+    {
+        return $this->pad_direction;
+    }
+
+    public function getPadChar(): ? string
+    {
+        return $this->pad_char;
+    }
+
+    public function getPadLength(): ? int
+    {
+        return $this->pad_length;
+    }
+
     public function reset(array $data = null)
     {
         if ($data) {
@@ -47,6 +65,15 @@ class Element implements JsonSerializable
                         break;
                     case 'auto_increment':
                         $this->auto_increment = $value;
+                        break;
+                    case 'pad_direction':
+                        $this->pad_direction = $value;
+                        break;
+                    case 'pad_char':
+                        $this->pad_char = $value;
+                        break;
+                    case 'pad_length':
+                        $this->pad_length = $value;
                         break;
                 }
             }

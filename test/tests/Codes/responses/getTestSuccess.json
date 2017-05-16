@@ -7,7 +7,10 @@
         "id": "cele_0De08e7034ea879aL4gv",
         "type": "text",
         "default_value": "",
-        "auto_increment": false
+        "auto_increment": false,
+        "pad_direction": null,
+        "pad_char": null,
+        "pad_length": null
       }
     ],
     "creation": "2017-05-15T20:39:13+00:00",
