@@ -5,8 +5,8 @@
     {
       "id": "cele_0De08e7034ea879aL4gv",
       "type": "text",
-      "default_value": "",
-      "auto_increment": false,
+      "value": null,
+      "auto_increment": null,
       "pad_direction": null,
       "pad_char": null,
       "pad_length": null
