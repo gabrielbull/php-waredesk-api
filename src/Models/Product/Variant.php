@@ -14,8 +14,8 @@ class Variant implements JsonSerializable
     private $id;
     private $images;
     private $annotations;
-    private $codes;
     private $prices;
+    private $codes;
     private $name;
     private $description;
     private $notes;
@@ -60,14 +60,14 @@ class Variant implements JsonSerializable
         return $this->annotations;
     }
 
-    public function getCodes(): ? Codes
-    {
-        return $this->codes;
-    }
-
     public function getPrices(): ? Prices
     {
         return $this->prices;
+    }
+
+    public function getCodes(): ? Codes
+    {
+        return $this->codes;
     }
 
     public function getName(): ? string
@@ -243,12 +243,12 @@ class Variant implements JsonSerializable
     public function jsonSerialize()
     {
         $returnValue = [
+            'annotations' => $this->getAnnotations()->jsonSerialize(),
+            'prices' => $this->getPrices()->jsonSerialize(),
+            'codes' => $this->getCodes()->jsonSerialize(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'notes' => $this->getNotes(),
-            'annotations' => $this->getAnnotations()->jsonSerialize(),
-            'codes' => $this->getCodes()->jsonSerialize(),
-            'prices' => $this->getPrices()->jsonSerialize(),
             'weight_unit' => $this->getWeightUnit(),
             'length_unit' => $this->getLengthUnit(),
             'weight' => $this->getWeight(),

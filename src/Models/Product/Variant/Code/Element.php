@@ -6,7 +6,7 @@ use JsonSerializable;
 
 class Element implements JsonSerializable
 {
-    private $id;
+    private $element;
     private $type;
     private $value;
     private $auto_increment;
@@ -14,9 +14,9 @@ class Element implements JsonSerializable
     private $pad_char;
     private $pad_length;
 
-    public function getId(): ? string
+    public function getElement(): ? string
     {
-        return $this->id;
+        return $this->element;
     }
 
     public function getType(): ? string
@@ -54,8 +54,8 @@ class Element implements JsonSerializable
         if ($data) {
             foreach ($data as $key => $value) {
                 switch ($key) {
-                    case 'id':
-                        $this->id = $value;
+                    case 'element':
+                        $this->element = $value;
                         break;
                     case 'type':
                         $this->type = $value;
@@ -85,11 +85,35 @@ class Element implements JsonSerializable
         $this->value = $value;
     }
 
+    public function setAutoIncrement(bool $auto_increment = null)
+    {
+        $this->auto_increment = $auto_increment;
+    }
+
+    public function setPadDirection(string $pad_direction = null)
+    {
+        $this->pad_direction = $pad_direction;
+    }
+
+    public function setPadChar(string $pad_char = null)
+    {
+        $this->pad_char = $pad_char;
+    }
+
+    public function setPadLength(int $pad_length = null)
+    {
+        $this->pad_length = $pad_length;
+    }
+
     public function jsonSerialize()
     {
         return [
-            'element' => $this->getId(),
+            'element' => $this->getElement(),
             'value' => $this->getValue(),
+            'auto_increment' => $this->getAutoIncrement(),
+            'pad_direction' => $this->getPadDirection(),
+            'pad_char' => $this->getPadChar(),
+            'pad_length' => $this->getPadLength(),
         ];
     }
 }

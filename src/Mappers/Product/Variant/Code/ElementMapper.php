@@ -14,6 +14,9 @@ class ElementMapper
                 case 'auto_increment':
                     $finalData['auto_increment'] = (bool)$value;
                     break;
+                case 'pad_length':
+                    $finalData['pad_length'] = (int)$value;
+                    break;
                 default:
                     $finalData[$key] = $value;
                     break;

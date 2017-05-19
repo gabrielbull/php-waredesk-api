@@ -8,7 +8,7 @@ use Waredesk\Collections\Products\Variants\Codes\Elements;
 
 class Code implements JsonSerializable
 {
-    private $id;
+    private $code;
     private $name;
     private $elements;
     private $creation;
@@ -19,9 +19,9 @@ class Code implements JsonSerializable
         $this->elements = new Elements();
     }
 
-    public function getId(): ? string
+    public function getCode(): ? string
     {
-        return $this->id;
+        return $this->code;
     }
 
     public function getName(): ? string
@@ -49,8 +49,8 @@ class Code implements JsonSerializable
         if ($data) {
             foreach ($data as $key => $value) {
                 switch ($key) {
-                    case 'id':
-                        $this->id = $value;
+                    case 'code':
+                        $this->code = $value;
                         break;
                     case 'name':
                         $this->name = $value;
@@ -72,7 +72,7 @@ class Code implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'code' => $this->getId(),
+            'code' => $this->getCode(),
             'elements' => $this->getElements()->jsonSerialize(),
         ];
     }

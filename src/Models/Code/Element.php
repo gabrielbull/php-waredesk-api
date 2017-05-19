@@ -13,7 +13,7 @@ class Element implements JsonSerializable
 {
     private $id;
     private $type;
-    private $default_value;
+    private $value;
     private $auto_increment;
     private $pad_direction;
     private $pad_char;
@@ -29,9 +29,9 @@ class Element implements JsonSerializable
         return $this->type;
     }
 
-    public function getDefaultValue(): ? string
+    public function getValue(): ? string
     {
-        return $this->default_value;
+        return $this->value;
     }
 
     public function getAutoIncrement(): ? bool
@@ -65,8 +65,8 @@ class Element implements JsonSerializable
                     case 'type':
                         $this->type = $value;
                         break;
-                    case 'default_value':
-                        $this->default_value = $value;
+                    case 'value':
+                        $this->value = $value;
                         break;
                     case 'auto_increment':
                         $this->auto_increment = $value;
@@ -90,9 +90,9 @@ class Element implements JsonSerializable
         $this->type = $type;
     }
 
-    public function setDefaultValue(string $default_value = null)
+    public function setValue(string $value = null)
     {
-        $this->default_value = $default_value;
+        $this->value = $value;
     }
 
     public function setAutoIncrement(bool $auto_increment = null)
@@ -119,7 +119,7 @@ class Element implements JsonSerializable
     {
         return [
             'type' => $this->getType(),
-            'default_value' => $this->getDefaultValue(),
+            'value' => $this->getValue(),
             'auto_increment' => $this->getAutoIncrement(),
             'pad_direction' => $this->getPadDirection(),
             'pad_char' => $this->getPadChar(),
