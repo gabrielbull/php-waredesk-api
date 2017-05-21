@@ -11,6 +11,11 @@ use Waredesk\Image;
 
 class Variant implements JsonSerializable
 {
+    public const WEIGHT_UNIT_IMPERIAL = 'imperial';
+    public const WEIGHT_UNIT_METRIC = 'metric';
+    public const LENGTH_UNIT_IMPERIAL = 'imperial';
+    public const LENGTH_UNIT_METRIC = 'metric';
+
     private $id;
     private $images;
     private $annotations;
@@ -19,8 +24,8 @@ class Variant implements JsonSerializable
     private $name;
     private $description;
     private $notes;
-    private $weight_unit;
-    private $length_unit;
+    private $weight_unit = self::WEIGHT_UNIT_METRIC;
+    private $length_unit = self::LENGTH_UNIT_METRIC;
     private $weight;
     private $width;
     private $height;

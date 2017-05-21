@@ -4,6 +4,7 @@ namespace Waredesk\Mappers\Product\Variant;
 
 use DateTime;
 use Waredesk\Collections\Products\Variants\Codes\Elements;
+use Waredesk\Mappers\Product\Variant\Code\ElementsMapper;
 use Waredesk\Models\Product\Variant\Code;
 
 class CodeMapper
