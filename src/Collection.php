@@ -17,6 +17,13 @@ abstract class Collection implements Iterator, Countable, ArrayAccess, JsonSeria
         $this->items = $items;
     }
 
+    public function __clone()
+    {
+        foreach ($this->items as $key => $item) {
+            $this->items[$key] = clone $item;
+        }
+    }
+
     public function reset()
     {
         $this->items = [];

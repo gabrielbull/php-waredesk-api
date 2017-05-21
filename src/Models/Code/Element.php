@@ -21,6 +21,10 @@ class Element implements Entity, ReplaceableEntity, JsonSerializable
     private $pad_char;
     private $pad_length;
 
+    public function __clone()
+    {
+    }
+
     public function getId(): ? string
     {
         return $this->id;

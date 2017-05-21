@@ -36,6 +36,11 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
         $this->reset($data);
     }
 
+    public function __clone()
+    {
+        $this->variants = clone $this->variants;
+    }
+
     public function getId(): ? string
     {
         return $this->id;

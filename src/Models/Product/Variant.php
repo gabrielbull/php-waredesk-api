@@ -52,6 +52,13 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
         $this->prices = new Prices();
     }
 
+    public function __clone()
+    {
+        $this->annotations = clone $this->annotations;
+        $this->codes = clone $this->codes;
+        $this->prices = clone $this->prices;
+    }
+
     public function getId(): ? string
     {
         return $this->id;

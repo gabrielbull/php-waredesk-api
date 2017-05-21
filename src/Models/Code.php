@@ -22,6 +22,11 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
         $this->reset($data);
     }
 
+    public function __clone()
+    {
+        $this->elements = clone $this->elements;
+    }
+
     public function getId(): ? string
     {
         return $this->id;

@@ -16,6 +16,10 @@ class Price implements Entity, ReplaceableEntity, JsonSerializable
     private $creation;
     private $modification;
 
+    public function __clone()
+    {
+    }
+
     public function getId(): ? string
     {
         return $this->id;

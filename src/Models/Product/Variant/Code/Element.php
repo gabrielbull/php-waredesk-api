@@ -15,6 +15,10 @@ class Element implements Entity, JsonSerializable
     private $pad_char;
     private $pad_length;
 
+    public function __clone()
+    {
+    }
+
     public function getElement(): ? string
     {
         return $this->element;

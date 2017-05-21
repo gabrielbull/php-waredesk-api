@@ -20,6 +20,11 @@ class Code implements Entity, JsonSerializable
         $this->elements = new Elements();
     }
 
+    public function __clone()
+    {
+        $this->elements = clone $this->elements;
+    }
+
     public function getCode(): ? string
     {
         return $this->code;
@@ -68,6 +73,11 @@ class Code implements Entity, JsonSerializable
                 }
             }
         }
+    }
+
+    public function setCode(string $code)
+    {
+        $this->code = $code;
     }
 
     public function jsonSerialize()
