@@ -7,6 +7,7 @@ use Waredesk\Collections\Codes\Elements;
 use JsonSerializable;
 use Waredesk\Entity;
 use Waredesk\ReplaceableEntity;
+use Waredesk\Models\Product\Variant\Code as VariantCode;
 
 class Code implements Entity, ReplaceableEntity, JsonSerializable
 {
@@ -25,6 +26,31 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
     public function __clone()
     {
         $this->elements = clone $this->elements;
+    }
+
+    public function toVariantCode(): VariantCode
+    {
+        $code = new VariantCode();
+        $code->reset([
+            'code' => $this->getId(),
+            'name' => $this->getName(),
+            'creation' => $this->getCreation(),
+            'modification' => $this->getModification(),
+        ]);
+        foreach ($this->getElements() as $element) {
+            $nextElement = new VariantCode\Element();
+            $nextElement->reset([
+                'element' => $element->getId(),
+                'type' => $element->getType(),
+                'value' => $element->getValue(),
+                'auto_increment' => $element->getAutoIncrement(),
+                'pad_direction' => $element->getPadDirection(),
+                'pad_char' => $element->getPadChar(),
+                'pad_length' => $element->getPadLength(),
+            ]);
+            $code->getElements()->add($nextElement);
+        }
+        return $code;
     }
 
     public function getId(): ? string
