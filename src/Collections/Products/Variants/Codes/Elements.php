@@ -12,4 +12,11 @@ use Waredesk\Models\Product\Variant\Code\Element;
  */
 class Elements extends Collection
 {
+    /**
+     * @param Element $item
+     */
+    public function add($item)
+    {
+        parent::add($item);
+    }
 }

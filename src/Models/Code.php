@@ -82,11 +82,15 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
         $this->name = $name;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
-        return [
+        $returnValue = [
             'name' => $this->getName(),
             'elements' => $this->getElements()->jsonSerialize(),
         ];
+        if ($this->getId()) {
+            $returnValue = array_merge(['id' => $this->getId()], $returnValue);
+        }
+        return $returnValue;
     }
 }

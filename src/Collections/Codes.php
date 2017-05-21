@@ -12,4 +12,11 @@ use Waredesk\Models\Code;
  */
 class Codes extends Collection
 {
+    /**
+     * @param Code $item
+     */
+    public function add($item)
+    {
+        parent::add($item);
+    }
 }

@@ -80,7 +80,7 @@ class Annotation implements Entity, ReplaceableEntity, JsonSerializable
         $this->value = $value;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'label' => $this->getLabel(),

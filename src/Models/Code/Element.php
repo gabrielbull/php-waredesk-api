@@ -121,9 +121,9 @@ class Element implements Entity, ReplaceableEntity, JsonSerializable
         $this->pad_length = $pad_length;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
-        return [
+        $returnValue = [
             'type' => $this->getType(),
             'value' => $this->getValue(),
             'auto_increment' => $this->getAutoIncrement(),
@@ -131,5 +131,9 @@ class Element implements Entity, ReplaceableEntity, JsonSerializable
             'pad_char' => $this->getPadChar(),
             'pad_length' => $this->getPadLength(),
         ];
+        if ($this->getId()) {
+            $returnValue = array_merge(['id' => $this->getId()], $returnValue);
+        }
+        return $returnValue;
     }
 }

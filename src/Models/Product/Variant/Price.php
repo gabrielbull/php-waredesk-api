@@ -94,7 +94,7 @@ class Price implements Entity, ReplaceableEntity, JsonSerializable
         $this->price = $price;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'price_list' => $this->getPriceList(),

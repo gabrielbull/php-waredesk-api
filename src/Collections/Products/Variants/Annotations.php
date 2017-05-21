@@ -12,4 +12,11 @@ use Waredesk\Models\Product\Variant\Annotation;
  */
 class Annotations extends Collection
 {
+    /**
+     * @param Annotation $item
+     */
+    public function add($item)
+    {
+        parent::add($item);
+    }
 }

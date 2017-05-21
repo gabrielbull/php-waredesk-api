@@ -54,8 +54,7 @@ abstract class Mapper
 
     private function createOrReplaceEntity(
         array $data, array $items, Collection $collection, string $entityClass, string $mapperClass
-    ): array
-    {
+    ): array {
         if (isset($data['id'])) {
             if (isset($items[$data['id']])) {
                 /**
@@ -74,8 +73,7 @@ abstract class Mapper
 
     private function createEntity(
         array $data, Collection $collection, string $entityClass, string $mapperClass
-    )
-    {
+    ) {
         /** @var Entity $item */
         $item = new $entityClass();
         $item = (new $mapperClass())->map($item, $data);

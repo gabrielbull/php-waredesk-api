@@ -110,7 +110,7 @@ class Element implements Entity, JsonSerializable
         $this->pad_length = $pad_length;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'element' => $this->getElement(),

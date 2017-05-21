@@ -80,7 +80,7 @@ class Code implements Entity, JsonSerializable
         $this->code = $code;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'code' => $this->getCode(),

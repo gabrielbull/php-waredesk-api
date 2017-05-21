@@ -12,4 +12,11 @@ use Waredesk\Models\Product\Variant\Price;
  */
 class Prices extends Collection
 {
+    /**
+     * @param Price $item
+     */
+    public function add($item)
+    {
+        parent::add($item);
+    }
 }

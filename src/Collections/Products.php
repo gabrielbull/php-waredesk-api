@@ -12,4 +12,11 @@ use Waredesk\Models\Product;
  */
 class Products extends Collection
 {
+    /**
+     * @param Product $item
+     */
+    public function add($item)
+    {
+        parent::add($item);
+    }
 }

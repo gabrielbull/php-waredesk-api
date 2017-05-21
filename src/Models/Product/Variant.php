@@ -41,9 +41,9 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
     private $pendingImage;
 
     /**
-     * @var Image
+     * @var bool
      */
-    private $deleteImage;
+    private $deleteImage = false;
 
     public function __construct()
     {
@@ -254,7 +254,7 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
         $this->depth = $depth;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $returnValue = [
             'annotations' => $this->getAnnotations()->jsonSerialize(),

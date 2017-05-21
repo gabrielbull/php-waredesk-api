@@ -28,7 +28,7 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
     /**
      * @var bool
      */
-    private $deleteImage;
+    private $deleteImage = false;
 
     public function __construct(array $data = null)
     {
@@ -142,7 +142,7 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
         $this->notes = $notes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $returnValue = [
             'variants' => $this->getVariants()->jsonSerialize(),

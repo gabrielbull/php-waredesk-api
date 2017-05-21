@@ -12,4 +12,11 @@ use Waredesk\Models\Product\Variant;
  */
 class Variants extends Collection
 {
+    /**
+     * @param Variant $item
+     */
+    public function add($item)
+    {
+        parent::add($item);
+    }
 }
