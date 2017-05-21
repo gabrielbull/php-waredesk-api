@@ -4,8 +4,10 @@ namespace Waredesk\Models\Product\Variant;
 
 use DateTime;
 use JsonSerializable;
+use Waredesk\Entity;
+use Waredesk\ReplaceableEntity;
 
-class Price implements JsonSerializable
+class Price implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
     private $price_list;

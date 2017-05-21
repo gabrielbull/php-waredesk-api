@@ -4,10 +4,11 @@ namespace Waredesk\Mappers\Product\Variant;
 
 use DateTime;
 use Waredesk\Collections\Products\Variants\Codes\Elements;
+use Waredesk\Mapper;
 use Waredesk\Mappers\Product\Variant\Code\ElementsMapper;
 use Waredesk\Models\Product\Variant\Code;
 
-class CodeMapper
+class CodeMapper extends Mapper
 {
     public function map(Code $code, $data): Code
     {

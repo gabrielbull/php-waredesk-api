@@ -28,5 +28,9 @@ class CreateTest extends BaseTest
 
         $code = $this->waredesk->codes->create($code);
         $this->assertNotEmpty($code->getId());
+        $this->assertGreaterThanOrEqual(1, count($code->getElements()));
+        foreach ($code->getElements() as $element) {
+            $this->assertInstanceOf(Code\Element::class, $element);
+        }
     }
 }

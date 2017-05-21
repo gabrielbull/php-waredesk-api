@@ -7,9 +7,11 @@ use JsonSerializable;
 use Waredesk\Collections\Products\Variants\Annotations;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Prices;
+use Waredesk\Entity;
 use Waredesk\Image;
+use Waredesk\ReplaceableEntity;
 
-class Variant implements JsonSerializable
+class Variant implements Entity, ReplaceableEntity, JsonSerializable
 {
     public const WEIGHT_UNIT_IMPERIAL = 'imperial';
     public const WEIGHT_UNIT_METRIC = 'metric';

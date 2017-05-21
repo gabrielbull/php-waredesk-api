@@ -3,11 +3,12 @@
 namespace Waredesk\Mappers;
 
 use Waredesk\Collections\Codes\Elements;
+use Waredesk\Mapper;
 use Waredesk\Mappers\Code\ElementsMapper;
 use Waredesk\Models\Code;
 use DateTime;
 
-class CodeMapper
+class CodeMapper extends Mapper
 {
     public function map(Code $code, array $data): Code
     {
@@ -15,7 +16,7 @@ class CodeMapper
         foreach ($data as $key => $value) {
             switch ($key) {
                 case 'elements':
-                    $finalData['elements'] = (new ElementsMapper())->map(new Elements(), $value);
+                    $finalData['elements'] = (new ElementsMapper())->map($code->getElements(), $value);
                     break;
                 case 'creation':
                     $finalData['creation'] = new DateTime($value);

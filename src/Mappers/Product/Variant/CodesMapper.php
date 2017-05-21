@@ -3,15 +3,13 @@
 namespace Waredesk\Mappers\Product\Variant;
 
 use Waredesk\Collections\Products\Variants\Codes;
+use Waredesk\Mapper;
 use Waredesk\Models\Product\Variant\Code;
 
-class CodesMapper
+class CodesMapper extends Mapper
 {
     public function map(Codes $codes, array $data): Codes
     {
-        foreach ($data as $codeData) {
-            $codes->add((new CodeMapper())->map(new Code(), $codeData));
-        }
-        return $codes;
+        return $this->create($codes, $data, Code::class, CodeMapper::class);
     }
 }

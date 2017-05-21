@@ -7,9 +7,11 @@ use JsonSerializable;
 use Waredesk\Collections\Products\Variants\Annotations;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Prices;
+use Waredesk\Entity;
 use Waredesk\Image;
+use Waredesk\ReplaceableEntity;
 
-class Element implements JsonSerializable
+class Element implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
     private $type;

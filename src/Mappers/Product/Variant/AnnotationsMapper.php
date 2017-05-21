@@ -3,15 +3,13 @@
 namespace Waredesk\Mappers\Product\Variant;
 
 use Waredesk\Collections\Products\Variants\Annotations;
+use Waredesk\Mapper;
 use Waredesk\Models\Product\Variant\Annotation;
 
-class AnnotationsMapper
+class AnnotationsMapper extends Mapper
 {
     public function map(Annotations $annotations, array $data): Annotations
     {
-        foreach ($data as $annotation) {
-            $annotations->add((new AnnotationMapper())->map(new Annotation(), $annotation));
-        }
-        return $annotations;
+        return $this->replace($annotations, $data, Annotation::class, AnnotationMapper::class);
     }
 }

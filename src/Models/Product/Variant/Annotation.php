@@ -4,8 +4,10 @@ namespace Waredesk\Models\Product\Variant;
 
 use DateTime;
 use JsonSerializable;
+use Waredesk\Entity;
+use Waredesk\ReplaceableEntity;
 
-class Annotation implements JsonSerializable
+class Annotation implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
     private $label;

@@ -3,8 +3,9 @@
 namespace Waredesk\Models\Product\Variant\Code;
 
 use JsonSerializable;
+use Waredesk\Entity;
 
-class Element implements JsonSerializable
+class Element implements Entity, JsonSerializable
 {
     private $element;
     private $type;

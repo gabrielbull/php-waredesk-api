@@ -7,13 +7,14 @@ use Waredesk\Collections\Products\Variants\Annotations;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Options;
 use Waredesk\Collections\Products\Variants\Prices;
+use Waredesk\Mapper;
 use Waredesk\Mappers\Product\Variant\AnnotationsMapper;
 use Waredesk\Mappers\Product\Variant\CodesMapper;
 use Waredesk\Mappers\Product\Variant\OptionsMapper;
 use Waredesk\Mappers\Product\Variant\PricesMapper;
 use Waredesk\Models\Product\Variant;
 
-class VariantMapper
+class VariantMapper extends Mapper
 {
     public function map(Variant $variant, $data): Variant
     {

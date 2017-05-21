@@ -3,9 +3,10 @@
 namespace Waredesk\Mappers\Product\Variant;
 
 use DateTime;
+use Waredesk\Mapper;
 use Waredesk\Models\Product\Variant\Annotation;
 
-class AnnotationMapper
+class AnnotationMapper extends Mapper
 {
     public function map(Annotation $option, $data): Annotation
     {

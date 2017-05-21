@@ -5,8 +5,9 @@ namespace Waredesk\Models\Product\Variant;
 use DateTime;
 use JsonSerializable;
 use Waredesk\Collections\Products\Variants\Codes\Elements;
+use Waredesk\Entity;
 
-class Code implements JsonSerializable
+class Code implements Entity, JsonSerializable
 {
     private $code;
     private $name;

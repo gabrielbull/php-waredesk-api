@@ -5,9 +5,11 @@ namespace Waredesk\Models;
 use DateTime;
 use Waredesk\Collections\Products\Variants;
 use JsonSerializable;
+use Waredesk\Entity;
 use Waredesk\Image;
+use Waredesk\ReplaceableEntity;
 
-class Product implements JsonSerializable
+class Product implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
     private $images;

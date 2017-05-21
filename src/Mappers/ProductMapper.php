@@ -3,11 +3,12 @@
 namespace Waredesk\Mappers;
 
 use Waredesk\Collections\Products\Variants;
+use Waredesk\Mapper;
 use Waredesk\Mappers\Product\VariantsMapper;
 use Waredesk\Models\Product;
 use DateTime;
 
-class ProductMapper
+class ProductMapper extends Mapper
 {
     public function map(Product $product, array $data): Product
     {

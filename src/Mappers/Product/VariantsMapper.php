@@ -3,15 +3,13 @@
 namespace Waredesk\Mappers\Product;
 
 use Waredesk\Collections\Products\Variants;
+use Waredesk\Mapper;
 use Waredesk\Models\Product\Variant;
 
-class VariantsMapper
+class VariantsMapper extends Mapper
 {
     public function map(Variants $variants, array $data): Variants
     {
-        foreach ($data as $variantData) {
-            $variants->add((new VariantMapper())->map(new Variant(), $variantData));
-        }
-        return $variants;
+        return $this->replace($variants, $data, Variant::class, VariantMapper::class);
     }
 }

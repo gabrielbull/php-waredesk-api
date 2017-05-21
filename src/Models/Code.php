@@ -5,8 +5,10 @@ namespace Waredesk\Models;
 use DateTime;
 use Waredesk\Collections\Codes\Elements;
 use JsonSerializable;
+use Waredesk\Entity;
+use Waredesk\ReplaceableEntity;
 
-class Code implements JsonSerializable
+class Code implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
     private $name;

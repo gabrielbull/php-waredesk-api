@@ -5,8 +5,9 @@ namespace Waredesk;
 use Iterator;
 use Countable;
 use JsonSerializable;
+use ArrayAccess;
 
-abstract class Collection implements Iterator, Countable, JsonSerializable
+abstract class Collection implements Iterator, Countable, ArrayAccess, JsonSerializable
 {
     protected $items;
     protected $key;
@@ -14,6 +15,11 @@ abstract class Collection implements Iterator, Countable, JsonSerializable
     public function __construct(array $items = [])
     {
         $this->items = $items;
+    }
+
+    public function reset()
+    {
+        $this->items = [];
     }
 
     public function replace(array $items = [])
@@ -67,5 +73,25 @@ abstract class Collection implements Iterator, Countable, JsonSerializable
     public function rewind()
     {
         reset($this->items);
+    }
+
+    public function offsetExists($offset): bool
+    {
+        return array_key_exists($offset, $this->items);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->items[$offset];
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        $this->items[$offset] = $value;
+    }
+
+    public function offsetUnset($offset)
+    {
+        unset($this->items[$offset]);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace Waredesk\Mappers\Code;
 
+use Waredesk\Mapper;
 use Waredesk\Models\Code\Element;
 
-class ElementMapper
+class ElementMapper extends Mapper
 {
     public function map(Element $element, $data): Element
     {

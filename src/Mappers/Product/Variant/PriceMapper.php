@@ -3,9 +3,10 @@
 namespace Waredesk\Mappers\Product\Variant;
 
 use DateTime;
+use Waredesk\Mapper;
 use Waredesk\Models\Product\Variant\Price;
 
-class PriceMapper
+class PriceMapper extends Mapper
 {
     public function map(Price $price, $data): Price
     {
