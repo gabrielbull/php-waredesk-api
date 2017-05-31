@@ -1,0 +1,20 @@
+{
+  "error": "invalid_request",
+  "message": "Request is invalid",
+  "errors": [
+    {
+      "field": "variants",
+      "error": "child_errors",
+      "message": "Field 'variants' has errors in it's children",
+      "errors": [
+        [
+          {
+            "field": "name",
+            "error": "invalid",
+            "message": "Field 'name' is invalid"
+          }
+        ]
+      ]
+    }
+  ]
+}

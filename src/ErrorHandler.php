@@ -19,7 +19,7 @@ class ErrorHandler
             case 'authentication_error':
                 throw new AuthenticationErrorException($error['message']);
             case 'invalid_request':
-                throw new InvalidRequestException($error['message']);
+                throw new InvalidRequestException($error['message'], $error['errors']);
             case 'account_banned':
                 throw new AccountBannedException($error['message']);
             case 'account_deleted':

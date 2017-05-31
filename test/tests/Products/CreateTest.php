@@ -3,6 +3,7 @@
 namespace Waredesk\Tests\Products;
 
 use GuzzleHttp\Psr7\Response;
+use Waredesk\Exceptions\InvalidRequestException;
 use Waredesk\Image;
 use Waredesk\Models\Code;
 use Waredesk\Models\Product;
@@ -72,5 +73,36 @@ class CreateTest extends BaseTest
         $array = $product->jsonSerialize();
         $this->assertEquals($array['variants'][0]['codes'][0]['code'], 'code_0F8f8936aeb96c8b6gZQ');
         $this->assertEquals($array['variants'][0]['codes'][0]['elements'][0]['element'], 'cele_0De08e7034ea879aL4gv');
+    }
+
+    public function testFailure()
+    {
+        $product = $this->createProduct();
+        $product->getVariants()->first()->setName('');
+
+        $this->mock->append(new Response(400, [], file_get_contents(__DIR__ . '/responses/createTestFailure.json')));
+
+        try {
+            $this->waredesk->products->create($product);
+        } catch (InvalidRequestException $e) {
+            $this->assertEquals('Request is invalid', $e->getMessage());
+            $expectedError = [
+                [
+                    'field' => 'variants',
+                    'error' => 'child_errors',
+                    'message' => 'Field \'variants\' has errors in it\'s children',
+                    'errors' => [
+                        [
+                            [
+                                'field' => 'name',
+                                'error' => 'invalid',
+                                'message' => 'Field \'name\' is invalid',
+                            ]
+                        ]
+                    ]
+                ]
+            ];
+            $this->assertEquals($expectedError, $e->getErrors());
+        }
     }
 }
