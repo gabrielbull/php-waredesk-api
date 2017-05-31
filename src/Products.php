@@ -25,6 +25,24 @@ class Products
         return $product;
     }
 
+    public function update(Product $product): Product
+    {
+        $response = $this->requestHandler->update(
+            "/v1/products/{$product->getId()}",
+            $product
+        );
+        $product = (new ProductMapper())->map($product, $response);
+        return $product;
+    }
+
+    public function delete(Product $product): bool
+    {
+        $this->requestHandler->delete(
+            "/v1/products/{$product->getId()}"
+        );
+        return true;
+    }
+
     /**
      * @return Collections\Products|Product[]
      */

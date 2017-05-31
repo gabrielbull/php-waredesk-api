@@ -82,9 +82,13 @@ class Annotation implements Entity, ReplaceableEntity, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return [
+        $returnValue = [
             'label' => $this->getLabel(),
             'value' => $this->getValue(),
         ];
+        if ($this->getId()) {
+            $returnValue = array_merge(['id' => $this->getId()], $returnValue);
+        }
+        return $returnValue;
     }
 }

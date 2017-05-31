@@ -96,10 +96,14 @@ class Price implements Entity, ReplaceableEntity, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return [
+        $returnValue = [
             'price_list' => $this->getPriceList(),
             'currency' => $this->getCurrency(),
             'price' => $this->getPrice(),
         ];
+        if ($this->getId()) {
+            $returnValue = array_merge(['id' => $this->getId()], $returnValue);
+        }
+        return $returnValue;
     }
 }

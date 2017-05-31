@@ -275,6 +275,9 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
         } elseif ($this->deleteImage) {
             $returnValue['image'] = null;
         }
+        if ($this->getId()) {
+            $returnValue = array_merge(['id' => $this->getId()], $returnValue);
+        }
         return $returnValue;
     }
 }

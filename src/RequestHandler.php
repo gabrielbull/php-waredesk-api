@@ -132,9 +132,15 @@ class RequestHandler
         return $body;
     }
 
-    private function request(Request $request): array
+    private function request(string $method, string $endpoint, array $headers = [], $params = null): array
     {
         try {
+            $request = new GuzzleRequest(
+                $method,
+                $endpoint,
+                $this->enhanceHeaders($headers),
+                $this->encodeParams($params)
+            );
             $response = $this->client->send($request);
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
                 return \GuzzleHttp\json_decode((string)$response->getBody(), true);
@@ -148,25 +154,21 @@ class RequestHandler
 
     public function get(string $endpoint, array $headers = [], array $params = null): array
     {
-        return $this->request(
-            new GuzzleRequest(
-                'GET',
-                $endpoint,
-                $this->enhanceHeaders($headers),
-                $this->encodeParams($params)
-            )
-        );
+        return $this->request('GET', $endpoint, $headers, $params);
     }
 
     public function post(string $endpoint, $params = null, array $headers = []): array
     {
-        return $this->request(
-            new GuzzleRequest(
-                'POST',
-                $endpoint,
-                $this->enhanceHeaders($headers),
-                $this->encodeParams($params)
-            )
-        );
+        return $this->request('POST', $endpoint, $headers, $params);
+    }
+
+    public function update(string $endpoint, $params = null, array $headers = []): array
+    {
+        return $this->request('PUT', $endpoint, $headers, $params);
+    }
+
+    public function delete(string $endpoint, $params = null, array $headers = []): array
+    {
+        return $this->request('DELETE', $endpoint, $headers, $params);
     }
 }
