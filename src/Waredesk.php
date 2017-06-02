@@ -27,6 +27,7 @@ class Waredesk
         $this->requestHandler = new RequestHandler($clientId, $clientSecret, $accessToken, $this->apiUrl);
         $this->products = new Products($this->requestHandler);
         $this->codes = new Codes($this->requestHandler);
+        $this->categories = new Categories($this->requestHandler);
     }
 
     public function getApiUrl()

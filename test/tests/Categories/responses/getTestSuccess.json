@@ -1,0 +1,16 @@
+[
+  {
+    "id": "cate_0Abeeadcfb913000tlvM",
+    "parent": null,
+    "name": "Men",
+    "creation": "2017-06-02T00:20:53+00:00",
+    "modification": "2017-06-02T00:20:53+00:00"
+  },
+  {
+    "id": "cate_0Abeeadcfb913000tlvM",
+    "parent": "cate_0Abeeadcfb913000tlvM",
+    "name": "Underwear",
+    "creation": "2017-06-02T00:20:53+00:00",
+    "modification": "2017-06-02T00:20:53+00:00"
+  }
+]
