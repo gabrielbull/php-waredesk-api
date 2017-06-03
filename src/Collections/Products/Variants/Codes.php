@@ -16,12 +16,12 @@ class Codes extends Collection
     /**
      * @param Code|\Waredesk\Models\Code $item
      */
-    public function add($item)
+    public function add($item): void
     {
         parent::add($item);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return array_map(function (JsonSerializable $item) {
             $finalItem = $item->jsonSerialize();

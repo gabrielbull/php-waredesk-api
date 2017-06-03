@@ -1,6 +1,16 @@
 [
   {
     "id": "pdct_1E19b830adf420544gQJ",
+    "categories": [
+      {
+        "id": "cate_0Abeeadcfb913000tlvM",
+        "name": "Men"
+      },
+      {
+        "id": "cate_0Abeeadcfb913000tlvM",
+        "name": "Underwear"
+      }
+    ],
     "images": {
       "small": "url\/to\/image",
       "medium": "url\/to\/image",

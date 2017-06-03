@@ -15,7 +15,7 @@ class Prices extends Collection
     /**
      * @param Price $item
      */
-    public function add($item)
+    public function add($item): void
     {
         parent::add($item);
     }

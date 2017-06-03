@@ -15,7 +15,7 @@ class Categories extends Collection
     /**
      * @param Category $item
      */
-    public function add($item)
+    public function add($item): void
     {
         parent::add($item);
     }

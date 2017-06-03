@@ -3,6 +3,7 @@
 namespace Waredesk\Models;
 
 use DateTime;
+use Waredesk\Collections\Products\Categories;
 use Waredesk\Collections\Products\Variants;
 use JsonSerializable;
 use Waredesk\Entity;
@@ -12,6 +13,7 @@ use Waredesk\ReplaceableEntity;
 class Product implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
+    private $categories;
     private $images;
     private $variants;
     private $name;
@@ -32,18 +34,25 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
 
     public function __construct(array $data = null)
     {
+        $this->categories = new Categories();
         $this->variants = new Variants();
         $this->reset($data);
     }
 
     public function __clone()
     {
+        $this->categories = clone $this->categories;
         $this->variants = clone $this->variants;
     }
 
     public function getId(): ? string
     {
         return $this->id;
+    }
+
+    public function getCategories(): ? Categories
+    {
+        return $this->categories;
     }
 
     public function getImages(): ? array
@@ -88,6 +97,9 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
                 switch ($key) {
                     case 'id':
                         $this->id = $value;
+                        break;
+                    case 'categories':
+                        $this->categories = $value;
                         break;
                     case 'images':
                         $this->deleteImage = false;
@@ -145,6 +157,7 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
     public function jsonSerialize(): array
     {
         $returnValue = [
+            'categories' => $this->getCategories()->jsonSerialize(),
             'variants' => $this->getVariants()->jsonSerialize(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),

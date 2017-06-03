@@ -15,7 +15,7 @@ class Elements extends Collection
     /**
      * @param Element $item
      */
-    public function add($item)
+    public function add($item): void
     {
         parent::add($item);
     }

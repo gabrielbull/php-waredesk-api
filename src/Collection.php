@@ -24,17 +24,17 @@ abstract class Collection implements Iterator, Countable, ArrayAccess, JsonSeria
         }
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->items = [];
     }
 
-    public function replace(array $items = [])
+    public function replace(array $items = []): void
     {
         $this->items = $items;
     }
 
-    public function add($item)
+    public function add($item): void
     {
         $this->items[] = $item;
     }
@@ -44,14 +44,19 @@ abstract class Collection implements Iterator, Countable, ArrayAccess, JsonSeria
         return isset($this->items[0]) ? $this->items[0] : null;
     }
 
-    public function jsonSerialize()
+    public function toArray(): array
+    {
+        return $this->items;
+    }
+
+    public function jsonSerialize(): array
     {
         return array_map(function (JsonSerializable $item) {
             return $item->jsonSerialize();
         }, $this->items);
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -66,18 +71,18 @@ abstract class Collection implements Iterator, Countable, ArrayAccess, JsonSeria
         return next($this->items);
     }
 
-    public function key()
+    public function key(): int
     {
         return key($this->items);
     }
 
-    public function valid()
+    public function valid(): bool
     {
         $key = key($this->items);
         return ($key !== null && $key !== false);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->items);
     }
@@ -92,12 +97,12 @@ abstract class Collection implements Iterator, Countable, ArrayAccess, JsonSeria
         return $this->items[$offset];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->items[$offset] = $value;
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->items[$offset]);
     }

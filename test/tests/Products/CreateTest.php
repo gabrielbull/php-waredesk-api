@@ -17,6 +17,11 @@ class CreateTest extends BaseTest
         $product->setName('Amazing T-Shirt');
         $product->setDescription('This T-Shirt will cover your belly');
 
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../Categories/responses/getTestSuccess.json')));
+        $categories = $this->waredesk->categories->fetch();
+
+        $product->getCategories()->add($categories->first());
+
         $variant = new Product\Variant();
         $variant->setName('X-Large');
         $product->getVariants()->add($variant);
@@ -32,6 +37,8 @@ class CreateTest extends BaseTest
 
         $product = $this->waredesk->products->create($product);
         $this->assertNotEmpty($product->getId());
+
+        $this->assertNotEmpty($product->getCategories()->first()->getId());
     }
 
     public function testCreateProductWithImage()
