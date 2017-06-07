@@ -12,6 +12,7 @@ class CreateTest extends BaseTest
     {
         $code = new Code();
         $code->setName('SKU');
+        $code->setQuantity(2);
 
         $element = new Code\Element();
         $element->setType('text');
@@ -28,6 +29,7 @@ class CreateTest extends BaseTest
 
         $code = $this->waredesk->codes->create($code);
         $this->assertNotEmpty($code->getId());
+        $this->assertEquals(2, $code->getQuantity());
         $this->assertGreaterThanOrEqual(1, count($code->getElements()));
         foreach ($code->getElements() as $element) {
             $this->assertInstanceOf(Code\Element::class, $element);

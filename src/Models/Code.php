@@ -13,6 +13,7 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
     private $name;
+    private $quantity;
     private $elements;
     private $creation;
     private $modification;
@@ -34,6 +35,7 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
         $code->reset([
             'code' => $this->getId(),
             'name' => $this->getName(),
+            'quantity' => $this->getQuantity(),
             'creation' => $this->getCreation(),
             'modification' => $this->getModification(),
         ]);
@@ -63,6 +65,11 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
         return $this->name;
     }
 
+    public function getQuantity(): ? int
+    {
+        return $this->quantity;
+    }
+
     public function getElements(): ? Elements
     {
         return $this->elements;
@@ -89,6 +96,9 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
                     case 'name':
                         $this->name = $value;
                         break;
+                    case 'quantity':
+                        $this->quantity = $value;
+                        break;
                     case 'elements':
                         $this->elements = $value;
                         break;
@@ -108,10 +118,16 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
         $this->name = $name;
     }
 
+    public function setQuantity(int $quantity = null)
+    {
+        $this->quantity = $quantity;
+    }
+
     public function jsonSerialize(): array
     {
         $returnValue = [
             'name' => $this->getName(),
+            'quantity' => $this->getQuantity(),
             'elements' => $this->getElements()->jsonSerialize(),
         ];
         if ($this->getId()) {

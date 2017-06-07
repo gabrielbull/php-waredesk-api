@@ -15,6 +15,9 @@ class CodeMapper extends Mapper
         $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
+                case 'quantity':
+                    $finalData['quantity'] = (int)$value;
+                    break;
                 case 'elements':
                     $finalData['elements'] = (new ElementsMapper())->map($code->getElements(), $value);
                     break;

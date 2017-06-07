@@ -11,6 +11,7 @@ class Code implements Entity, JsonSerializable
 {
     private $code;
     private $name;
+    private $quantity;
     private $elements;
     private $creation;
     private $modification;
@@ -33,6 +34,11 @@ class Code implements Entity, JsonSerializable
     public function getName(): ? string
     {
         return $this->name;
+    }
+
+    public function getQuantity(): ? int
+    {
+        return $this->quantity;
     }
 
     public function getElements(): ? Elements
@@ -61,6 +67,9 @@ class Code implements Entity, JsonSerializable
                     case 'name':
                         $this->name = $value;
                         break;
+                    case 'quantity':
+                        $this->quantity = $value;
+                        break;
                     case 'elements':
                         $this->elements = $value;
                         break;
@@ -80,10 +89,16 @@ class Code implements Entity, JsonSerializable
         $this->code = $code;
     }
 
+    public function setQuantity(int $quantity = null)
+    {
+        $this->quantity = $quantity;
+    }
+
     public function jsonSerialize(): array
     {
         return [
             'code' => $this->getCode(),
+            'quantity' => $this->getQuantity(),
             'elements' => $this->getElements()->jsonSerialize(),
         ];
     }
