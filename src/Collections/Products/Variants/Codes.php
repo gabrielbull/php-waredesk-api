@@ -10,6 +10,7 @@ use JsonSerializable;
  * @method Code first()
  * @method Code current()
  * @method Code next()
+ * @method Code offsetGet($offset)
  */
 class Codes extends Collection
 {
@@ -19,6 +20,28 @@ class Codes extends Collection
     public function add($item): void
     {
         parent::add($item);
+    }
+
+    public function findByCode(string $code): ? Code
+    {
+        /** @var Code $item */
+        foreach ($this->items as $item) {
+            if ($item->getCode() === $code) {
+                return $item;
+            }
+        }
+        return null;
+    }
+
+    public function findByName($name): ? Code
+    {
+        /** @var Code $item */
+        foreach ($this->items as $item) {
+            if ($item->getName() === $name) {
+                return $item;
+            }
+        }
+        return null;
     }
 
     public function jsonSerialize(): array
