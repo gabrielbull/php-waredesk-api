@@ -1,20 +1,24 @@
 <?php
 
-namespace Waredesk\Models\Product\Variant;
+namespace Waredesk\Models\Inventory\Item;
 
-use DateTime;
 use JsonSerializable;
 use Waredesk\Entity;
-use Waredesk\ReplaceableEntity;
+use DateTime;
 
-class Price implements Entity, ReplaceableEntity, JsonSerializable
+class Activity implements Entity, JsonSerializable
 {
     private $id;
-    private $price_list;
-    private $currency;
-    private $price;
+    private $type;
+    private $note;
+    private $date;
     private $creation;
     private $modification;
+
+    public function __construct(array $data = null)
+    {
+        $this->reset($data);
+    }
 
     public function __clone()
     {
@@ -25,19 +29,19 @@ class Price implements Entity, ReplaceableEntity, JsonSerializable
         return $this->id;
     }
 
-    public function getPriceList(): ? string
+    public function getType(): ? string
     {
-        return $this->price_list;
+        return $this->type;
     }
 
-    public function getCurrency(): ? string
+    public function getNote(): ? string
     {
-        return $this->currency;
+        return $this->note;
     }
 
-    public function getPrice(): ? int
+    public function getDate(): ? DateTime
     {
-        return $this->price;
+        return $this->date;
     }
 
     public function getCreation(): ? DateTime
@@ -50,7 +54,6 @@ class Price implements Entity, ReplaceableEntity, JsonSerializable
         return $this->modification;
     }
 
-
     public function reset(array $data = null)
     {
         if ($data) {
@@ -59,14 +62,14 @@ class Price implements Entity, ReplaceableEntity, JsonSerializable
                     case 'id':
                         $this->id = $value;
                         break;
-                    case 'price_list':
-                        $this->price_list = $value;
+                    case 'type':
+                        $this->type = $value;
                         break;
-                    case 'currency':
-                        $this->currency = $value;
+                    case 'note':
+                        $this->note = $value;
                         break;
-                    case 'price':
-                        $this->price = $value;
+                    case 'date':
+                        $this->date = $value;
                         break;
                     case 'creation':
                         $this->creation = $value;
@@ -79,31 +82,28 @@ class Price implements Entity, ReplaceableEntity, JsonSerializable
         }
     }
 
-    public function setPriceList(string $price_list)
+    public function setType(string $type)
     {
-        $this->price_list = $price_list;
+        $this->type = $type;
     }
 
-    public function setCurrency(string $currency)
+    public function setNote(string $note)
     {
-        $this->currency = $currency;
+        $this->note = $note;
     }
 
-    public function setPrice(int $price)
+    public function setDate(DateTime $date)
     {
-        $this->price = $price;
+        $this->date = $date;
     }
 
     public function jsonSerialize(): array
     {
         $returnValue = [
-            'price_list' => $this->getPriceList(),
-            'currency' => $this->getCurrency(),
-            'price' => $this->getPrice(),
+            'type' => $this->getType(),
+            'note' => $this->getNote(),
+            'date' => $this->getDate()->format(DateTime::ATOM),
         ];
-        if ($this->getId()) {
-            $returnValue = array_merge(['id' => $this->getId()], $returnValue);
-        }
         return $returnValue;
     }
 }
