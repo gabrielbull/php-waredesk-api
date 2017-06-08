@@ -18,6 +18,11 @@ class Waredesk
      */
     public $products;
 
+    /**
+     * @var Inventory
+     */
+    public $inventory;
+
     private $apiUrl;
     private $requestHandler;
 
@@ -28,6 +33,7 @@ class Waredesk
         $this->products = new Products($this->requestHandler);
         $this->codes = new Codes($this->requestHandler);
         $this->categories = new Categories($this->requestHandler);
+        $this->inventory = new Inventory($this->requestHandler);
     }
 
     public function getApiUrl()

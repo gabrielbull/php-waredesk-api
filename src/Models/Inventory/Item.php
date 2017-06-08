@@ -17,7 +17,7 @@ class Item implements Entity, ReplaceableEntity, JsonSerializable
     private $variant;
     private $activities;
     private $codes;
-    private $in_stock;
+    private $in_stock = true;
     private $note;
     private $creation;
     private $modification;

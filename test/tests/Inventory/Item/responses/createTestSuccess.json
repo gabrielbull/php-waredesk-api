@@ -1,0 +1,17 @@
+{
+  "id": "item_0D211c2ea1ff181eJEN8",
+  "warehouse": null,
+  "product": "pdct_1Bde7bc0f07ee33cKP9o",
+  "variant": "vrnt_0B094a07ac109ee61J5n",
+  "activities": [],
+  "codes": [
+    {
+      "name": "SKU",
+      "value": "LEV-JN-SL-36-GN-C50"
+    }
+  ],
+  "in_stock": true,
+  "note": null,
+  "creation": "2017-06-08T08:55:07+00:00",
+  "modification": "2017-06-08T08:55:07+00:00"
+}
