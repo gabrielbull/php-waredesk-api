@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use Waredesk\Models\Category;
 use Waredesk\Tests\BaseTest;
 
-class CreateTest extends BaseTest
+class CategoryCreateTest extends BaseTest
 {
     private function createCategory(): Category
     {

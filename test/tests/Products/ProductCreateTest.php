@@ -9,7 +9,7 @@ use Waredesk\Models\Code;
 use Waredesk\Models\Product;
 use Waredesk\Tests\BaseTest;
 
-class CreateTest extends BaseTest
+class ProductCreateTest extends BaseTest
 {
     private function createProduct(): Product
     {

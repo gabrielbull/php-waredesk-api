@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use Waredesk\Models\Category;
 use Waredesk\Tests\BaseTest;
 
-class GetTest extends BaseTest
+class CategoriesFetchTest extends BaseTest
 {
     public function testFetchCategories()
     {

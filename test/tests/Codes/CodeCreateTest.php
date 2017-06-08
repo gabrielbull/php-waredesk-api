@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use Waredesk\Models\Code;
 use Waredesk\Tests\BaseTest;
 
-class CreateTest extends BaseTest
+class CodeCreateTest extends BaseTest
 {
     private function createCode(): Code
     {

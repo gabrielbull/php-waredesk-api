@@ -8,7 +8,7 @@ use Waredesk\Models\Code;
 use Waredesk\Models\Product;
 use Waredesk\Tests\BaseTest;
 
-class UpdateTest extends BaseTest
+class ProductUpdateTest extends BaseTest
 {
     public function testFake()
     {

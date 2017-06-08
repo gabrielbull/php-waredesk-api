@@ -7,7 +7,7 @@ use Waredesk\Image;
 use Waredesk\Models\Product;
 use Waredesk\Tests\BaseTest;
 
-class GetTest extends BaseTest
+class ProductsFetchTest extends BaseTest
 {
     public function testFetchProduct()
     {
