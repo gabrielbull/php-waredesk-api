@@ -3,17 +3,15 @@
 namespace Waredesk\Models;
 
 use DateTime;
-use Waredesk\Collections\Codes\Elements;
+use Waredesk\Collections\Variables\Elements;
 use JsonSerializable;
 use Waredesk\Entity;
 use Waredesk\ReplaceableEntity;
-use Waredesk\Models\Product\Variant\Code as VariantCode;
 
-class Code implements Entity, ReplaceableEntity, JsonSerializable
+class Variable implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
     private $name;
-    private $quantity;
     private $elements;
     private $creation;
     private $modification;
@@ -29,32 +27,6 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
         $this->elements = clone $this->elements;
     }
 
-    public function toVariantCode(): VariantCode
-    {
-        $code = new VariantCode();
-        $code->reset([
-            'code' => $this->getId(),
-            'name' => $this->getName(),
-            'quantity' => $this->getQuantity(),
-            'creation' => $this->getCreation(),
-            'modification' => $this->getModification(),
-        ]);
-        foreach ($this->getElements() as $element) {
-            $nextElement = new VariantCode\Element();
-            $nextElement->reset([
-                'element' => $element->getId(),
-                'type' => $element->getType(),
-                'value' => $element->getValue(),
-                'auto_increment' => $element->getAutoIncrement(),
-                'pad_direction' => $element->getPadDirection(),
-                'pad_char' => $element->getPadChar(),
-                'pad_length' => $element->getPadLength(),
-            ]);
-            $code->getElements()->add($nextElement);
-        }
-        return $code;
-    }
-
     public function getId(): ? string
     {
         return $this->id;
@@ -63,11 +35,6 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
     public function getName(): ? string
     {
         return $this->name;
-    }
-
-    public function getQuantity(): ? int
-    {
-        return $this->quantity;
     }
 
     public function getElements(): ? Elements
@@ -96,9 +63,6 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
                     case 'name':
                         $this->name = $value;
                         break;
-                    case 'quantity':
-                        $this->quantity = $value;
-                        break;
                     case 'elements':
                         $this->elements = $value;
                         break;
@@ -118,16 +82,10 @@ class Code implements Entity, ReplaceableEntity, JsonSerializable
         $this->name = $name;
     }
 
-    public function setQuantity(int $quantity = null)
-    {
-        $this->quantity = $quantity;
-    }
-
     public function jsonSerialize(): array
     {
         $returnValue = [
             'name' => $this->getName(),
-            'quantity' => $this->getQuantity(),
             'elements' => $this->getElements()->jsonSerialize(),
         ];
         if ($this->getId()) {

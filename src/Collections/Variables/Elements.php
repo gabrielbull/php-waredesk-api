@@ -1,9 +1,9 @@
 <?php
 
-namespace Waredesk\Collections\Codes;
+namespace Waredesk\Collections\Variables;
 
 use Waredesk\Collection;
-use Waredesk\Models\Code\Element;
+use Waredesk\Models\Variable\Element;
 
 /**
  * @method Element first()

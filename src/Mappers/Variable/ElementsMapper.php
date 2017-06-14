@@ -1,10 +1,10 @@
 <?php
 
-namespace Waredesk\Mappers\Code;
+namespace Waredesk\Mappers\Variable;
 
-use Waredesk\Collections\Codes\Elements;
+use Waredesk\Collections\Variables\Elements;
 use Waredesk\Mapper;
-use Waredesk\Models\Code\Element;
+use Waredesk\Models\Variable\Element;
 
 class ElementsMapper extends Mapper
 {

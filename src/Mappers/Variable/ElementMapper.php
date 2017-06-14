@@ -1,9 +1,9 @@
 <?php
 
-namespace Waredesk\Mappers\Code;
+namespace Waredesk\Mappers\Variable;
 
 use Waredesk\Mapper;
-use Waredesk\Models\Code\Element;
+use Waredesk\Models\Variable\Element;
 
 class ElementMapper extends Mapper
 {

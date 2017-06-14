@@ -1,14 +1,9 @@
 <?php
 
-namespace Waredesk\Models\Code;
+namespace Waredesk\Models\Variable;
 
-use DateTime;
 use JsonSerializable;
-use Waredesk\Collections\Products\Variants\Annotations;
-use Waredesk\Collections\Products\Variants\Codes;
-use Waredesk\Collections\Products\Variants\Prices;
 use Waredesk\Entity;
-use Waredesk\Image;
 use Waredesk\ReplaceableEntity;
 
 class Element implements Entity, ReplaceableEntity, JsonSerializable

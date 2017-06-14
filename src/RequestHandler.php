@@ -2,7 +2,7 @@
 
 namespace Waredesk;
 
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Client;
@@ -105,7 +105,7 @@ class RequestHandler
         throw new UnknownException();
     }
 
-    private function handleException(ClientException $exception)
+    private function handleException(BadResponseException $exception)
     {
         $this->handleBadResponse($exception->getResponse());
     }
@@ -146,7 +146,7 @@ class RequestHandler
                 return \GuzzleHttp\json_decode((string)$response->getBody(), true);
             }
             $this->handleBadResponse($response);
-        } catch (ClientException $e) {
+        } catch (BadResponseException $e) {
             $this->handleException($e);
         }
         throw new UnknownException();

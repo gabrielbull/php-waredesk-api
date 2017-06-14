@@ -1,11 +1,10 @@
 [
   {
-    "id": "code_0F8f8936aeb96c8b6gZQ",
-    "name": "Serial Number",
-    "quantity": null,
+    "id": "vrbl_0F8f8936aeb96c8b6gZQ",
+    "name": "T-Shirt Serial Number",
     "elements": [
       {
-        "id": "cele_0De08e7034ea879aL4gv",
+        "id": "vrel_0De08e7034ea879aL4gv",
         "type": "text",
         "value": null,
         "auto_increment": null,

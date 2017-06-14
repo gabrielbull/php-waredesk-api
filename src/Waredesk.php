@@ -9,9 +9,9 @@ class Waredesk
     const PRODUCTION_API_URL = 'https://api.waredesk.com';
 
     /**
-     * @var Codes
+     * @var Variables
      */
-    public $codes;
+    public $variables;
 
     /**
      * @var Products
@@ -31,7 +31,7 @@ class Waredesk
         $this->apiUrl = self::PRODUCTION_API_URL;
         $this->requestHandler = new RequestHandler($clientId, $clientSecret, $accessToken, $this->apiUrl);
         $this->products = new Products($this->requestHandler);
-        $this->codes = new Codes($this->requestHandler);
+        $this->variables = new Variables($this->requestHandler);
         $this->categories = new Categories($this->requestHandler);
         $this->inventory = new Inventory($this->requestHandler);
     }
