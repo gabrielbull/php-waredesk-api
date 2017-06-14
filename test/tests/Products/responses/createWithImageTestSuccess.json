@@ -25,9 +25,10 @@
         "large": "url\/to\/image",
         "original": "url\/to\/image"
       },
-      "annotations": [],
+      "attributes": [],
       "prices": [],
       "codes": [],
+      "items_attributes": [],
       "name": "X-Large",
       "description": null,
       "notes": null,

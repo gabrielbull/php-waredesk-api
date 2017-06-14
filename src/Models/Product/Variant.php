@@ -4,7 +4,8 @@ namespace Waredesk\Models\Product;
 
 use DateTime;
 use JsonSerializable;
-use Waredesk\Collections\Products\Variants\Annotations;
+use Waredesk\Collections\Products\Variants\Items\Attributes as ItemsAttributes;
+use Waredesk\Collections\Products\Variants\Attributes;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Prices;
 use Waredesk\Entity;
@@ -20,9 +21,10 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
 
     private $id;
     private $images;
-    private $annotations;
+    private $attributes;
     private $prices;
     private $codes;
+    private $items_attributes;
     private $name;
     private $description;
     private $notes;
@@ -47,14 +49,15 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
 
     public function __construct()
     {
-        $this->annotations = new Annotations();
+        $this->attributes = new Attributes();
         $this->codes = new Codes();
         $this->prices = new Prices();
+        $this->items_attributes = new ItemsAttributes();
     }
 
     public function __clone()
     {
-        $this->annotations = clone $this->annotations;
+        $this->attributes = clone $this->attributes;
         $this->codes = clone $this->codes;
         $this->prices = clone $this->prices;
     }
@@ -69,9 +72,9 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
         return $this->images;
     }
 
-    public function getAnnotations(): ? Annotations
+    public function getAttributes(): ? Attributes
     {
-        return $this->annotations;
+        return $this->attributes;
     }
 
     public function getPrices(): ? Prices
@@ -82,6 +85,11 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
     public function getCodes(): ? Codes
     {
         return $this->codes;
+    }
+
+    public function getItemsAttributes(): ? ItemsAttributes
+    {
+        return $this->items_attributes;
     }
 
     public function getName(): ? string
@@ -152,14 +160,17 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
                         $this->pendingImage = null;
                         $this->images = $value;
                         break;
-                    case 'annotations':
-                        $this->annotations = $value;
+                    case 'attributes':
+                        $this->attributes = $value;
+                        break;
+                    case 'prices':
+                        $this->prices = $value;
                         break;
                     case 'codes':
                         $this->codes = $value;
                         break;
-                    case 'prices':
-                        $this->prices = $value;
+                    case 'items_attributes':
+                        $this->items_attributes = $value;
                         break;
                     case 'name':
                         $this->name = $value;
@@ -257,9 +268,10 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
     public function jsonSerialize(): array
     {
         $returnValue = [
-            'annotations' => $this->getAnnotations()->jsonSerialize(),
+            'attributes' => $this->getAttributes()->jsonSerialize(),
             'prices' => $this->getPrices()->jsonSerialize(),
             'codes' => $this->getCodes()->jsonSerialize(),
+            'items_attributes' => $this->getItemsAttributes()->jsonSerialize(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'notes' => $this->getNotes(),

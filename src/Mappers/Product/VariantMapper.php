@@ -3,11 +3,13 @@
 namespace Waredesk\Mappers\Product;
 
 use DateTime;
-use Waredesk\Collections\Products\Variants\Annotations;
+use Waredesk\Collections\Products\Variants\Items\Attributes as ItemsAttributes;
+use Waredesk\Collections\Products\Variants\Attributes;
 use Waredesk\Collections\Products\Variants\Codes;
 use Waredesk\Collections\Products\Variants\Prices;
 use Waredesk\Mapper;
-use Waredesk\Mappers\Product\Variant\AnnotationsMapper;
+use Waredesk\Mappers\Product\Variant\Item\AttributesMapper as ItemAttributesMapper;
+use Waredesk\Mappers\Product\Variant\AttributesMapper;
 use Waredesk\Mappers\Product\Variant\CodesMapper;
 use Waredesk\Mappers\Product\Variant\PricesMapper;
 use Waredesk\Models\Product\Variant;
@@ -19,14 +21,17 @@ class VariantMapper extends Mapper
         $finalData = [];
         foreach ($data as $key => $value) {
             switch ($key) {
-                case 'annotations':
-                    $finalData['annotations'] = (new AnnotationsMapper())->map(new Annotations(), $value);
+                case 'attributes':
+                    $finalData['attributes'] = (new AttributesMapper())->map(new Attributes(), $value);
                     break;
                 case 'codes':
                     $finalData['codes'] = (new CodesMapper())->map(new Codes(), $value);
                     break;
                 case 'prices':
                     $finalData['prices'] = (new PricesMapper())->map(new Prices(), $value);
+                    break;
+                case 'items_attributes':
+                    $finalData['items_attributes'] = (new ItemAttributesMapper())->map(new ItemsAttributes(), $value);
                     break;
                 case 'weight':
                     $finalData['weight'] = (float)$value;

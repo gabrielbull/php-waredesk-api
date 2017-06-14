@@ -3,14 +3,12 @@
 namespace Waredesk\Mappers\Product\Variant;
 
 use DateTime;
-use Waredesk\Collections\Products\Variants\Codes\Elements;
 use Waredesk\Mapper;
-use Waredesk\Mappers\Product\Variant\Code\ElementsMapper;
-use Waredesk\Models\Product\Variant\Code;
+use Waredesk\Models\Product\Variant\Attribute;
 
-class CodeMapper extends Mapper
+class AttributeMapper extends Mapper
 {
-    public function map(Code $code, $data): Code
+    public function map(Attribute $attribute, $data): Attribute
     {
         $finalData = [];
         foreach ($data as $key => $value) {
@@ -26,7 +24,7 @@ class CodeMapper extends Mapper
                     break;
             }
         }
-        $code->reset($finalData);
-        return $code;
+        $attribute->reset($finalData);
+        return $attribute;
     }
 }

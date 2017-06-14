@@ -1,14 +1,14 @@
 <?php
 
-namespace Waredesk\Mappers\Product\Variant;
+namespace Waredesk\Mappers\Product\Variant\Item;
 
 use DateTime;
 use Waredesk\Mapper;
-use Waredesk\Models\Product\Variant\Annotation;
+use Waredesk\Models\Product\Variant\Item\Attribute;
 
-class AnnotationMapper extends Mapper
+class AttributeMapper extends Mapper
 {
-    public function map(Annotation $option, $data): Annotation
+    public function map(Attribute $attribute, $data): Attribute
     {
         $finalData = [];
         foreach ($data as $key => $value) {
@@ -24,7 +24,7 @@ class AnnotationMapper extends Mapper
                     break;
             }
         }
-        $option->reset($finalData);
-        return $option;
+        $attribute->reset($finalData);
+        return $attribute;
     }
 }

@@ -15,9 +15,10 @@
     {
       "id": "vrnt_0Ac94bdeb3183e62bGbt",
       "images": null,
-      "annotations": [],
+      "attributes": [],
       "prices": [],
       "codes": [],
+      "items_attributes": [],
       "name": "X-Large",
       "description": null,
       "notes": null,

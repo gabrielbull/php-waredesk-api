@@ -1,24 +1,19 @@
 <?php
 
-namespace Waredesk\Models\Product\Variant;
+namespace Waredesk\Models\Product\Variant\Item;
 
 use DateTime;
 use JsonSerializable;
-use Waredesk\Collections\Products\Variants\Codes\Elements;
 use Waredesk\Entity;
+use Waredesk\ReplaceableEntity;
 
-class Code implements Entity, JsonSerializable
+class Attribute implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
-    private $type;
-    private $custom_type;
+    private $name;
     private $value;
     private $creation;
     private $modification;
-
-    public function __construct()
-    {
-    }
 
     public function __clone()
     {
@@ -29,14 +24,9 @@ class Code implements Entity, JsonSerializable
         return $this->id;
     }
 
-    public function getType(): ? string
+    public function getName(): ? string
     {
-        return $this->type;
-    }
-
-    public function getCustomType(): ? string
-    {
-        return $this->custom_type;
+        return $this->name;
     }
 
     public function getValue(): ? string
@@ -62,11 +52,8 @@ class Code implements Entity, JsonSerializable
                     case 'id':
                         $this->id = $value;
                         break;
-                    case 'type':
-                        $this->type = $value;
-                        break;
-                    case 'custom_type':
-                        $this->custom_type = $value;
+                    case 'name':
+                        $this->name = $value;
                         break;
                     case 'value':
                         $this->value = $value;
@@ -82,14 +69,9 @@ class Code implements Entity, JsonSerializable
         }
     }
 
-    public function setType(string $type = null)
+    public function setName(string $label)
     {
-        $this->type = $type;
-    }
-
-    public function setCustomType(string $custom_type = null)
-    {
-        $this->custom_type = $custom_type;
+        $this->name = $label;
     }
 
     public function setValue(string $value)
@@ -100,8 +82,7 @@ class Code implements Entity, JsonSerializable
     public function jsonSerialize(): array
     {
         $returnValue = [
-            'type' => $this->getType(),
-            'custom_type' => $this->getCustomType(),
+            'name' => $this->getName(),
             'value' => $this->getValue(),
         ];
         if ($this->getId()) {

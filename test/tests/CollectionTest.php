@@ -2,19 +2,19 @@
 
 namespace Waredesk\Tests;
 
-use Waredesk\Models\Code;
+use Waredesk\Models\Variable;
 
 class CollectionTest extends BaseTest
 {
     public function testCloneEntityWithCollections()
     {
-        $code = new Code();
-        $element = new Code\Element();
+        $variable = new Variable();
+        $element = new Variable\Element();
         $element->setValue('value1');
-        $code->getElements()->add($element);
+        $variable->getElements()->add($element);
 
-        $code2 = clone $code;
-        $element2 = $code2->getElements()->first();
+        $variable2 = clone $variable;
+        $element2 = $variable2->getElements()->first();
         $element2->setValue('value2');
 
         $this->assertEquals('value1', $element->getValue());

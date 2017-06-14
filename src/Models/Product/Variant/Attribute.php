@@ -7,10 +7,10 @@ use JsonSerializable;
 use Waredesk\Entity;
 use Waredesk\ReplaceableEntity;
 
-class Annotation implements Entity, ReplaceableEntity, JsonSerializable
+class Attribute implements Entity, ReplaceableEntity, JsonSerializable
 {
     private $id;
-    private $label;
+    private $name;
     private $value;
     private $creation;
     private $modification;
@@ -24,9 +24,9 @@ class Annotation implements Entity, ReplaceableEntity, JsonSerializable
         return $this->id;
     }
 
-    public function getLabel(): ? string
+    public function getName(): ? string
     {
-        return $this->label;
+        return $this->name;
     }
 
     public function getValue(): ? string
@@ -44,7 +44,6 @@ class Annotation implements Entity, ReplaceableEntity, JsonSerializable
         return $this->modification;
     }
 
-
     public function reset(array $data = null)
     {
         if ($data) {
@@ -53,8 +52,8 @@ class Annotation implements Entity, ReplaceableEntity, JsonSerializable
                     case 'id':
                         $this->id = $value;
                         break;
-                    case 'label':
-                        $this->label = $value;
+                    case 'name':
+                        $this->name = $value;
                         break;
                     case 'value':
                         $this->value = $value;
@@ -70,9 +69,9 @@ class Annotation implements Entity, ReplaceableEntity, JsonSerializable
         }
     }
 
-    public function setLabel(string $label)
+    public function setName(string $label)
     {
-        $this->label = $label;
+        $this->name = $label;
     }
 
     public function setValue(string $value)
@@ -83,7 +82,7 @@ class Annotation implements Entity, ReplaceableEntity, JsonSerializable
     public function jsonSerialize(): array
     {
         $returnValue = [
-            'label' => $this->getLabel(),
+            'name' => $this->getName(),
             'value' => $this->getValue(),
         ];
         if ($this->getId()) {
