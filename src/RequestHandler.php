@@ -132,7 +132,7 @@ class RequestHandler
         return $body;
     }
 
-    private function request(string $method, string $endpoint, array $headers = [], $params = null): array
+    private function request(string $method, string $endpoint, array $headers = [], $params = null)
     {
         try {
             $request = new GuzzleRequest(
@@ -143,10 +143,11 @@ class RequestHandler
             );
             $response = $this->client->send($request);
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
-                /*if ($endpoint !== '/v1/authorize') {
+                /*if ($endpoint !== '/v1/authorize' && $method !== 'GET') {
+                    echo $method.PHP_EOL;
+                    echo $endpoint.PHP_EOL;
                     $body = (string)$response->getBody();
                     //$obj = \GuzzleHttp\json_decode($body);
-                    echo $this->encodeParams($params).PHP_EOL;
                     echo $body;
                     die();
                 }*/
@@ -154,6 +155,9 @@ class RequestHandler
             }
             $this->handleBadResponse($response);
         } catch (BadResponseException $e) {
+            /*$body = (string)$e->getResponse()->getBody();
+            echo $body;
+            die();*/
             $this->handleException($e);
         }
         throw new UnknownException();
@@ -174,7 +178,7 @@ class RequestHandler
         return $this->request('PUT', $endpoint, $headers, $params);
     }
 
-    public function delete(string $endpoint, $params = null, array $headers = []): array
+    public function delete(string $endpoint, $params = null, array $headers = []): bool
     {
         return $this->request('DELETE', $endpoint, $headers, $params);
     }
