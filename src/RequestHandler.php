@@ -143,6 +143,13 @@ class RequestHandler
             );
             $response = $this->client->send($request);
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
+                /*if ($endpoint !== '/v1/authorize') {
+                    $body = (string)$response->getBody();
+                    //$obj = \GuzzleHttp\json_decode($body);
+                    echo $this->encodeParams($params).PHP_EOL;
+                    echo $body;
+                    die();
+                }*/
                 return \GuzzleHttp\json_decode((string)$response->getBody(), true);
             }
             $this->handleBadResponse($response);
@@ -152,7 +159,7 @@ class RequestHandler
         throw new UnknownException();
     }
 
-    public function get(string $endpoint, array $headers = [], array $params = null): array
+    public function get(string $endpoint, $params = null, array $headers = []): array
     {
         return $this->request('GET', $endpoint, $headers, $params);
     }
