@@ -28,7 +28,7 @@ class VariableCreateTest extends BaseTest
 
         $variable = $this->waredesk->variables->create($variable);
         $this->assertNotEmpty($variable->getId());
-        $this->assertGreaterThanOrEqual(1, count($variable->getElements()));
+        $this->assertEquals(1, count($variable->getElements()));
         foreach ($variable->getElements() as $element) {
             $this->assertInstanceOf(Variable\Element::class, $element);
         }

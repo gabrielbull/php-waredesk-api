@@ -2,6 +2,7 @@
 
 namespace Waredesk\Mappers;
 
+use Waredesk\Collections\Variables\Elements;
 use Waredesk\Mapper;
 use Waredesk\Mappers\Variable\ElementsMapper;
 use Waredesk\Models\Variable;
@@ -18,7 +19,7 @@ class VariableMapper extends Mapper
                     $finalData['quantity'] = (int)$value;
                     break;
                 case 'elements':
-                    $finalData['elements'] = (new ElementsMapper())->map($variable->getElements(), $value);
+                    $finalData['elements'] = (new ElementsMapper())->map(new Elements(), $value);
                     break;
                 case 'creation':
                     $finalData['creation'] = new DateTime($value);
