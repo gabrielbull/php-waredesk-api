@@ -11,7 +11,7 @@ class ProductFetchTest extends BaseTest
 {
     public function testFetchProduct()
     {
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/getTestSuccess.json')));
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../files/products/getTestSuccess.json')));
 
         $products = $this->waredesk->products->fetch();
         $this->assertGreaterThan(0, count($products));

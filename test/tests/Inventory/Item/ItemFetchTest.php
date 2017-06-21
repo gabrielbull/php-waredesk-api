@@ -8,9 +8,9 @@ use Waredesk\Tests\BaseTest;
 
 class ItemFetchTest extends BaseTest
 {
-    public function testFetchInventoryItems()
+    public function testFetchItems()
     {
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/getTestSuccess.json')));
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../../files/inventory/items/getTestSuccess.json')));
 
         $items = $this->waredesk->inventory->items->fetch();
         $this->assertGreaterThan(0, count($items));

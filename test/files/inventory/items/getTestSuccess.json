@@ -1,33 +1,32 @@
 [
   {
-    "id": "item_0D211c2ea1ff181eJEN8",
+    "id": "item_0C48a519563c419d4Pgo",
     "warehouse": null,
-    "product": "pdct_1Bde7bc0f07ee33cKP9o",
-    "variant": "vrnt_0B094a07ac109ee61J5n",
+    "product": "pdct_0Bb142cf0a4292bewYB7",
+    "variant": "vrnt_0F71e9181492833do6hQ",
     "activities": [
       {
-        "id": "acti_1E71cc4da9d88adfNJhz",
+        "id": "acti_0D574aa4aafaf42ayVoA",
         "type": "Sale",
         "note": "Sold to Jane Doe\nOrder ID: 203443",
         "date": "2017-05-23T16:43:45+00:00",
-        "creation": "2017-06-20T15:05:25+00:00",
-        "modification": "2017-06-20T15:05:25+00:00"
+        "creation": "2017-06-21T11:58:43+00:00",
+        "modification": "2017-06-21T11:58:43+00:00"
       }
     ],
     "attributes": [
       {
-        "id": "itat_0C7df1c6bdca3631SEzg",
-        "item_attribute": "viat_1A4b816104cf36edpkTl",
+        "id": "itat_0F6bc7eaa1cd5a168hkv",
+        "item_attribute": "viat_1Dcaea6b9988c114KXwM",
         "name": "Serial Number",
-        "value": "TSDGM0000000012",
-        "creation": "2017-06-08T08:55:07+00:00",
-        "modification": "2017-06-08T08:55:07+00:00"
+        "value": "default value",
+        "creation": "2017-06-21T11:58:43+00:00",
+        "modification": "2017-06-21T11:58:43+00:00"
       }
     ],
     "in_stock": true,
     "note": null,
-    "creation": "2017-06-08T08:55:07+00:00",
-    "modification": "2017-06-08T08:55:07+00:00"
+    "creation": "2017-06-21T11:58:43+00:00",
+    "modification": "2017-06-21T11:58:43+00:00"
   }
-
 ]

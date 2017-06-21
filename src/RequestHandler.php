@@ -141,9 +141,6 @@ class RequestHandler
                 $this->enhanceHeaders($headers),
                 $this->encodeParams($params)
             );
-            if ($endpoint !== '/v1-alpha/authorize') {
-                echo '';
-            }
             $response = $this->client->send($request);
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
                 /*if ($endpoint !== '/v1/authorize' && $method !== 'GET') {

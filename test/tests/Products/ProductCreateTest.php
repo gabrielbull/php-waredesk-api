@@ -17,7 +17,7 @@ class ProductCreateTest extends BaseTest
         $product->setName('Amazing T-Shirt');
         $product->setDescription('This T-Shirt will cover your belly');
 
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../Categories/responses/getTestSuccess.json')));
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../files/categories/getTestSuccess.json')));
         $categories = $this->waredesk->categories->fetch();
 
         $product->getCategories()->add($categories->first());
