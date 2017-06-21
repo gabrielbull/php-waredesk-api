@@ -15,7 +15,7 @@ class ItemCreateTest extends BaseTest
         $item = $this->inventory->itemsController->createItem();
         $item->getAttributes()->first()->setValue('final value');
 
-        //$this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/createTestSuccess.json')));
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../../files/inventory/items/createTestSuccess.json')));
         $item = $this->waredesk->inventory->items->create($item);
 
         $this->assertNotEmpty($item->getId());
@@ -25,6 +25,7 @@ class ItemCreateTest extends BaseTest
     public function tearDown()
     {
         foreach ($this->items as $item) {
+            $this->mock->append(new Response(200, [], 'true'));
             $this->waredesk->inventory->items->delete($item);
         }
     }
