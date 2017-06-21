@@ -2,36 +2,68 @@
 
 namespace Waredesk\Inventory;
 
+use Waredesk\Controller;
 use Waredesk\Mappers\Inventory\ItemMapper;
 use Waredesk\Mappers\Inventory\ItemsMapper;
 use Waredesk\Models\Inventory\Item;
-use Waredesk\RequestHandler;
+use Waredesk\Collections;
 
-class Items
+class Items extends Controller
 {
-    private $requestHandler;
-
-    public function __construct(RequestHandler $requestHandler)
-    {
-        $this->requestHandler = $requestHandler;
-    }
+    private const ENDPOINT = '/v1-alpha/inventory/items';
 
     public function create(Item $item): Item
     {
-        $response = $this->requestHandler->post(
-            '/v1-alpha/inventory/items',
-            $item
+        return $this->doCreate(
+            self::ENDPOINT,
+            $item,
+            function ($response) use ($item) {
+                return (new ItemMapper())->map($item, $response);
+            }
         );
-        $item = (new ItemMapper())->map($item, $response);
-        return $item;
     }
 
-    /**
-     * @return \Waredesk\Collections\Inventory\Items|Item[]
-     */
-    public function fetch(): \Waredesk\Collections\Inventory\Items
+    public function delete(Item $item): bool
     {
-        $response = $this->requestHandler->get('/v1-alpha/inventory/items');
-        return (new ItemsMapper())->map(new \Waredesk\Collections\Inventory\Items(), $response);
+        $this->validateIsNotNewEntity($item->getId());
+        return $this->doDelete(self::ENDPOINT."/{$item->getId()}");
+    }
+
+    public function fetch(string $orderBy = null, string $order = self::ORDER_BY_ASC, int $limit = null): Collections\Inventory\Items
+    {
+        return $this->doFetch(
+            self::ENDPOINT,
+            $orderBy,
+            $order,
+            $limit,
+            function ($response) {
+                return (new ItemsMapper())->map(new Collections\Inventory\Items(), $response);
+            }
+        );
+    }
+
+    public function fetchOne(string $orderBy = null, string $order = self::ORDER_BY_ASC): ? Item
+    {
+        return $this->doFetchOne(
+            self::ENDPOINT,
+            $orderBy,
+            $order,
+            function ($response) {
+                return (new ItemsMapper())->map(new Collections\Inventory\Items(), $response);
+            }
+        );
+    }
+
+    public function findOneBy(array $criteria, string $orderBy = null, string $order = self::ORDER_BY_ASC): ? Item
+    {
+        return $this->doFindOneBy(
+            self::ENDPOINT,
+            $criteria,
+            $orderBy,
+            $order,
+            function ($response) {
+                return (new ItemsMapper())->map(new Collections\Inventory\Items(), $response);
+            }
+        );
     }
 }

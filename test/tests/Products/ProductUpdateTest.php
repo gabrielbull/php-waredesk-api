@@ -39,7 +39,7 @@ class ProductUpdateTest extends BaseTest
 
     public function testCreateProductWithImage()
     {
-        $image = new Image(__DIR__.'/../files/tshirt.jpg');
+        $image = new Image(__DIR__.'/../../files/tshirt.jpg');
         $product = $this->createProduct();
         $product->setImage($image);
         $product->getVariants()->first()->setImage($image);

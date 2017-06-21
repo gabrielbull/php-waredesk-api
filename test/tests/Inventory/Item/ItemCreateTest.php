@@ -8,24 +8,24 @@ use Waredesk\Tests\BaseTest;
 
 class ItemCreateTest extends BaseTest
 {
-    private function createItem(): Item
-    {
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../Products/responses/getTestSuccess.json')));
-        $products = $this->waredesk->products->fetch();
-
-        $item = new Item();
-        $item->setVariant($products->first()->getVariants()->first()->getId());
-
-        return $item;
-    }
+    private $items = [];
 
     public function testCreateItem()
     {
-        $item = $this->createItem();
+        $item = $this->inventory->itemsController->createItem();
+        $item->getAttributes()->first()->setValue('final value');
 
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/createTestSuccess.json')));
-
+        //$this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/createTestSuccess.json')));
         $item = $this->waredesk->inventory->items->create($item);
+
         $this->assertNotEmpty($item->getId());
+        $this->items[] = $item;
+    }
+
+    public function tearDown()
+    {
+        foreach ($this->items as $item) {
+            $this->waredesk->inventory->items->delete($item);
+        }
     }
 }

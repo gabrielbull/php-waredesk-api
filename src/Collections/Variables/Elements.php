@@ -9,6 +9,7 @@ use Waredesk\Models\Variable\Element;
  * @method Element first()
  * @method Element current()
  * @method Element next()
+ * @method Element offsetGet($offset)
  */
 class Elements extends Collection
 {

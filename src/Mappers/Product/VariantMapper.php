@@ -34,16 +34,16 @@ class VariantMapper extends Mapper
                     $finalData['items_attributes'] = (new ItemAttributesMapper())->map(new ItemsAttributes(), $value);
                     break;
                 case 'weight':
-                    $finalData['weight'] = (float)$value;
+                    $finalData['weight'] = null === $value ? null : (float)$value;
                     break;
                 case 'height':
-                    $finalData['height'] = (float)$value;
+                    $finalData['height'] = null === $value ? null : (float)$value;
                     break;
                 case 'depth':
-                    $finalData['depth'] = (float)$value;
+                    $finalData['depth'] = null === $value ? null : (float)$value;
                     break;
                 case 'width':
-                    $finalData['width'] = (float)$value;
+                    $finalData['width'] = null === $value ? null : (float)$value;
                     break;
                 case 'creation':
                     $finalData['creation'] = new DateTime($value);

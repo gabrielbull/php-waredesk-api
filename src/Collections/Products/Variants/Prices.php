@@ -9,6 +9,7 @@ use Waredesk\Models\Product\Variant\Price;
  * @method Price first()
  * @method Price current()
  * @method Price next()
+ * @method Price offsetGet($offset)
  */
 class Prices extends Collection
 {

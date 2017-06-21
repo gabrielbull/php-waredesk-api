@@ -45,14 +45,35 @@ abstract class Controller
         return true;
     }
 
-    protected function doFetch(string $path, callable $mappingFunction)
+    protected function doFetch(string $path, string $orderBy = null, string $order = self::ORDER_BY_ASC, int $limit = null, callable $mappingFunction)
     {
-        return $mappingFunction($this->requestHandler->get($path));
+        $response = $this->requestHandler->get($path, [
+            'order_by' => $orderBy,
+            'order' => $order,
+            'limit' => $limit
+        ]);
+        return $mappingFunction($response);
     }
 
     protected function doFetchOne(string $path, string $orderBy = null, string $order = self::ORDER_BY_ASC, callable $mappingFunction)
     {
         $response = $this->requestHandler->get($path, [
+            'order_by' => $orderBy,
+            'order' => $order,
+            'limit' => 1
+        ]);
+        /** @var Collection $items */
+        $items = $mappingFunction($response);
+        if (count($items)) {
+            return $items->first();
+        }
+        return null;
+    }
+
+    protected function doFindOneBy(string $path, array $criteria, string $orderBy = null, string $order = self::ORDER_BY_ASC, callable $mappingFunction)
+    {
+        $response = $this->requestHandler->get($path, [
+            'criteria' => $criteria,
             'order_by' => $orderBy,
             'order' => $order,
             'limit' => 1

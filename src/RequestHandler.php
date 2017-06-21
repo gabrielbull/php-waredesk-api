@@ -61,7 +61,7 @@ class RequestHandler
         }
         $this->disabledAuthentication();
         $response = $this->post(
-            '/v1/authorize',
+            '/v1-alpha/authorize',
             [
                 'client_id' => $this->clientId,
                 'client_secret' => $this->clientSecret,
@@ -141,6 +141,9 @@ class RequestHandler
                 $this->enhanceHeaders($headers),
                 $this->encodeParams($params)
             );
+            if ($endpoint !== '/v1-alpha/authorize') {
+                echo '';
+            }
             $response = $this->client->send($request);
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
                 /*if ($endpoint !== '/v1/authorize' && $method !== 'GET') {

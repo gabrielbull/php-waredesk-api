@@ -3,11 +3,11 @@
 namespace Waredesk\Mappers\Inventory;
 
 use Waredesk\Collections\Inventory\Items\Activities;
-use Waredesk\Collections\Inventory\Items\Codes;
+use Waredesk\Collections\Inventory\Items\Attributes;
 use Waredesk\Mapper;
 use DateTime;
 use Waredesk\Mappers\Inventory\Item\ActivitiesMapper;
-use Waredesk\Mappers\Inventory\Item\CodesMapper;
+use Waredesk\Mappers\Inventory\Item\AttributesMapper;
 use Waredesk\Models\Inventory\Item;
 
 class ItemMapper extends Mapper
@@ -20,8 +20,8 @@ class ItemMapper extends Mapper
                 case 'activities':
                     $finalData['activities'] = (new ActivitiesMapper())->map(new Activities(), $value);
                     break;
-                case 'codes':
-                    $finalData['codes'] = (new CodesMapper())->map(new Codes(), $value);
+                case 'attributes':
+                    $finalData['attributes'] = (new AttributesMapper())->map(new Attributes(), $value);
                     break;
                 case 'in_stock':
                     $finalData['variants'] = (bool)$value;

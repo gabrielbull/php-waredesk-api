@@ -9,6 +9,7 @@ use Waredesk\Models\Inventory\Item;
  * @method Item first()
  * @method Item current()
  * @method Item next()
+ * @method Item offsetGet($offset)
  */
 class Items extends Collection
 {

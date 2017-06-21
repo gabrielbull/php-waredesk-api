@@ -18,7 +18,7 @@ class ProductMapper extends Mapper
         foreach ($data as $key => $value) {
             switch ($key) {
                 case 'categories':
-                    $finalData['variants'] = (new CategoriesMapper())->map(new Categories(), $value);
+                    $finalData['categories'] = (new CategoriesMapper())->map(new Categories(), $value);
                     break;
                 case 'variants':
                     $finalData['variants'] = (new VariantsMapper())->map(new Variants(), $value);

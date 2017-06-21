@@ -19,7 +19,7 @@ class CategoryCreateTest extends BaseTest
     {
         $category = $this->createCategory();
 
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/createTestSuccess.json')));
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../files/categories/createTestSuccess.json')));
 
         $category = $this->waredesk->categories->create($category);
         $this->assertNotEmpty($category->getId());

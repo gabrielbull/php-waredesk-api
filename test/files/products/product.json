@@ -1,0 +1,48 @@
+{
+  "id": "pdct_1E19b830adf420544gQJ",
+  "categories": [
+    {
+      "id": "cate_0Abeeadcfb913000tlvM",
+      "name": "Men"
+    },
+    {
+      "id": "cate_0Abeeadcfb913000tlvM",
+      "name": "Underwear"
+    }
+  ],
+  "images": null,
+  "variants": [
+    {
+      "id": "vrnt_0Ac94bdeb3183e62bGbt",
+      "images": null,
+      "attributes": [],
+      "prices": [],
+      "codes": [],
+      "items_attributes": [
+        {
+          "id": "viat_1A4b816104cf36edpkTl",
+          "name": "Serial Number",
+          "value": "default value",
+          "creation": "2017-06-20T14:15:13+00:00",
+          "modification": "2017-06-20T14:15:13+00:00"
+        }
+      ],
+      "name": "X-Large",
+      "description": null,
+      "notes": null,
+      "weight_unit": "imperial",
+      "length_unit": "imperial",
+      "weight": null,
+      "height": null,
+      "depth": null,
+      "width": null,
+      "creation": "2017-05-15T20:42:37+00:00",
+      "modification": "2017-05-15T20:42:37+00:00"
+    }
+  ],
+  "name": "Amazing T-Shirt",
+  "description": "This T-Shirt will cover your belly",
+  "notes": null,
+  "creation": "2017-05-15T20:42:37+00:00",
+  "modification": "2017-05-15T20:42:37+00:00"
+}

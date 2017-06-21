@@ -5,6 +5,7 @@ namespace Waredesk\Models\Inventory;
 use DateTime;
 use JsonSerializable;
 use Waredesk\Collections\Inventory\Items\Activities;
+use Waredesk\Collections\Inventory\Items\Attributes;
 use Waredesk\Collections\Inventory\Items\Codes;
 use Waredesk\Entity;
 use Waredesk\ReplaceableEntity;
@@ -16,7 +17,7 @@ class Item implements Entity, ReplaceableEntity, JsonSerializable
     private $product;
     private $variant;
     private $activities;
-    private $codes;
+    private $attributes;
     private $in_stock = true;
     private $note;
     private $creation;
@@ -25,14 +26,14 @@ class Item implements Entity, ReplaceableEntity, JsonSerializable
     public function __construct(array $data = null)
     {
         $this->activities = new Activities();
-        $this->codes = new Codes();
+        $this->attributes = new Attributes();
         $this->reset($data);
     }
 
     public function __clone()
     {
         $this->activities = clone $this->activities;
-        $this->codes = clone $this->codes;
+        $this->attributes = clone $this->attributes;
     }
 
     public function getId(): ? string
@@ -60,9 +61,9 @@ class Item implements Entity, ReplaceableEntity, JsonSerializable
         return $this->activities;
     }
 
-    public function getCodes(): Codes
+    public function getAttributes(): Attributes
     {
-        return $this->codes;
+        return $this->attributes;
     }
 
     public function isInStock(): ? bool
@@ -105,8 +106,8 @@ class Item implements Entity, ReplaceableEntity, JsonSerializable
                     case 'activities':
                         $this->activities = $value;
                         break;
-                    case 'codes':
-                        $this->codes = $value;
+                    case 'attributes':
+                        $this->attributes = $value;
                         break;
                     case 'in_stock':
                         $this->in_stock = $value;
@@ -151,7 +152,7 @@ class Item implements Entity, ReplaceableEntity, JsonSerializable
             'warehouse' => $this->getWarehouse(),
             'variant' => $this->getVariant(),
             'activities' => $this->getActivities()->jsonSerialize(),
-            'codes' => $this->getCodes()->jsonSerialize(),
+            'attributes' => $this->getAttributes()->jsonSerialize(),
             'in_stock' => $this->isInStock(),
             'note' => $this->getNote(),
         ];

@@ -9,6 +9,7 @@ use Waredesk\Models\Product\Variant;
  * @method Variant first()
  * @method Variant current()
  * @method Variant next()
+ * @method Variant offsetGet($offset)
  */
 class Variants extends Collection
 {

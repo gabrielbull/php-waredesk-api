@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use Waredesk\Models\Inventory\Item;
 use Waredesk\Tests\BaseTest;
 
-class ItemsFetchTest extends BaseTest
+class ItemFetchTest extends BaseTest
 {
     public function testFetchInventoryItems()
     {

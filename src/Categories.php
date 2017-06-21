@@ -6,31 +6,62 @@ use Waredesk\Mappers\CategoriesMapper;
 use Waredesk\Mappers\CategoryMapper;
 use Waredesk\Models\Category;
 
-class Categories
+class Categories extends Controller
 {
-    private $requestHandler;
-
-    public function __construct(RequestHandler $requestHandler)
-    {
-        $this->requestHandler = $requestHandler;
-    }
+    private const ENDPOINT = '/v1-alpha/categories';
 
     public function create(Category $category): Category
     {
-        $response = $this->requestHandler->post(
-            '/v1/categories',
-            $category
+        return $this->doCreate(
+            self::ENDPOINT,
+            $category,
+            function ($response) use ($category) {
+                return (new CategoryMapper())->map($category, $response);
+            }
         );
-        $category = (new CategoryMapper())->map($category, $response);
-        return $category;
     }
 
-    /**
-     * @return Collections\Categories|Category[]
-     */
-    public function fetch(): Collections\Categories
+    public function delete(Category $category): bool
     {
-        $response = $this->requestHandler->get('/v1/categories');
-        return (new CategoriesMapper())->map(new Collections\Categories(), $response);
+        $this->validateIsNotNewEntity($category->getId());
+        return $this->doDelete(self::ENDPOINT."/{$category->getId()}");
+    }
+
+    public function fetch(string $orderBy = null, string $order = self::ORDER_BY_ASC, int $limit = null): Collections\Categories
+    {
+        return $this->doFetch(
+            self::ENDPOINT,
+            $orderBy,
+            $order,
+            $limit,
+            function ($response) {
+                return (new CategoriesMapper())->map(new Collections\Categories(), $response);
+            }
+        );
+    }
+
+    public function fetchOne(string $orderBy = null, string $order = self::ORDER_BY_ASC): ? Category
+    {
+        return $this->doFetchOne(
+            self::ENDPOINT,
+            $orderBy,
+            $order,
+            function ($response) {
+                return (new CategoriesMapper())->map(new Collections\Categories(), $response);
+            }
+        );
+    }
+
+    public function findOneBy(array $criteria, string $orderBy = null, string $order = self::ORDER_BY_ASC): ? Category
+    {
+        return $this->doFindOneBy(
+            self::ENDPOINT,
+            $criteria,
+            $orderBy,
+            $order,
+            function ($response) {
+                return (new CategoriesMapper())->map(new Collections\Categories(), $response);
+            }
+        );
     }
 }

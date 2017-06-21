@@ -33,7 +33,7 @@ class ProductCreateTest extends BaseTest
     {
         $product = $this->createProduct();
 
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/createTestSuccess.json')));
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../files/products/createTestSuccess.json')));
 
         $product = $this->waredesk->products->create($product);
         $this->assertNotEmpty($product->getId());
@@ -43,12 +43,12 @@ class ProductCreateTest extends BaseTest
 
     public function testCreateProductWithImage()
     {
-        $image = new Image(__DIR__.'/../files/tshirt.jpg');
+        $image = new Image(__DIR__ . '/../../files/tshirt.jpg');
         $product = $this->createProduct();
         $product->setImage($image);
         $product->getVariants()->first()->setImage($image);
 
-        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/responses/createWithImageTestSuccess.json')));
+        $this->mock->append(new Response(200, [], file_get_contents(__DIR__ . '/../../files/products/createWithImageTestSuccess.json')));
 
         $product = $this->waredesk->products->create($product);
         $this->assertNotEmpty($product->getImages()['small']);
@@ -60,7 +60,7 @@ class ProductCreateTest extends BaseTest
         $product = $this->createProduct();
         $product->getVariants()->first()->setName('');
 
-        $this->mock->append(new Response(400, [], file_get_contents(__DIR__ . '/responses/createTestFailure.json')));
+        $this->mock->append(new Response(400, [], file_get_contents(__DIR__ . '/../../files/products/createTestFailure.json')));
 
         try {
             $this->waredesk->products->create($product);

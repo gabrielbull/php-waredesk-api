@@ -1,9 +1,9 @@
 <?php
 
-namespace Waredesk\Collections\Products\Variants;
+namespace Waredesk\Collections\Inventory\Items;
 
 use Waredesk\Collection;
-use Waredesk\Models\Product\Variant\Attribute;
+use Waredesk\Models\Inventory\Item\Attribute;
 
 /**
  * @method Attribute first()

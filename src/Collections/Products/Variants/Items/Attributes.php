@@ -9,6 +9,7 @@ use Waredesk\Models\Product\Variant\Item\Attribute;
  * @method Attribute first()
  * @method Attribute current()
  * @method Attribute next()
+ * @method Attribute offsetGet($offset)
  */
 class Attributes extends Collection
 {

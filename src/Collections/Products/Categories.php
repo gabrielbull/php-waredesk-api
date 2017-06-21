@@ -9,6 +9,7 @@ use Waredesk\Models\Product\Category;
  * @method Category first()
  * @method Category current()
  * @method Category next()
+ * @method Category offsetGet($offset)
  */
 class Categories extends Collection
 {

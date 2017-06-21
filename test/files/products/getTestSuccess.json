@@ -29,7 +29,15 @@
         "attributes": [],
         "prices": [],
         "codes": [],
-        "items_attributes": [],
+        "items_attributes": [
+          {
+            "id": "viat_1A4b816104cf36edpkTl",
+            "name": "Serial Number",
+            "value": "{vrbl_1Fd2daa40b2a7b380KX4}",
+            "creation": "2017-06-20T14:15:13+00:00",
+            "modification": "2017-06-20T14:15:13+00:00"
+          }
+        ],
         "name": "X-Large",
         "description": null,
         "notes": null,

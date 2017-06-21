@@ -6,49 +6,68 @@ use Waredesk\Mappers\ProductMapper;
 use Waredesk\Mappers\ProductsMapper;
 use Waredesk\Models\Product;
 
-class Products
+class Products extends Controller
 {
-    private $requestHandler;
-
-    public function __construct(RequestHandler $requestHandler)
-    {
-        $this->requestHandler = $requestHandler;
-    }
+    private const ENDPOINT = '/v1-alpha/products';
 
     public function create(Product $product): Product
     {
-        $response = $this->requestHandler->post(
-            '/v1/products',
-            $product
+        return $this->doCreate(
+            self::ENDPOINT,
+            $product,
+            function ($response) use ($product) {
+                return (new ProductMapper())->map($product, $response);
+            }
         );
-        $product = (new ProductMapper())->map($product, $response);
-        return $product;
     }
 
     public function update(Product $product): Product
     {
-        $response = $this->requestHandler->update(
-            "/v1/products/{$product->getId()}",
-            $product
+        $this->validateIsNotNewEntity($product->getId());
+        return $this->doUpdate(
+            self::ENDPOINT."/{$product->getId()}",
+            $product,
+            function ($response) use ($product) {
+                return (new ProductMapper())->map($product, $response);
+            }
         );
-        $product = (new ProductMapper())->map($product, $response);
-        return $product;
     }
 
-    public function delete(Product $product): bool
+    public function fetch(string $orderBy = null, string $order = self::ORDER_BY_ASC, int $limit = null): Collections\Products
     {
-        $this->requestHandler->delete(
-            "/v1/products/{$product->getId()}"
+        return $this->doFetch(
+            self::ENDPOINT,
+            $orderBy,
+            $order,
+            $limit,
+            function ($response) {
+                return (new ProductsMapper())->map(new Collections\Products(), $response);
+            }
         );
-        return true;
     }
 
-    /**
-     * @return Collections\Products|Product[]
-     */
-    public function fetch(): Collections\Products
+    public function fetchOne(string $orderBy = null, string $order = self::ORDER_BY_ASC): ? Product
     {
-        $response = $this->requestHandler->get('/v1/products');
-        return (new ProductsMapper())->map(new Collections\Products(), $response);
+        return $this->doFetchOne(
+            self::ENDPOINT,
+            $orderBy,
+            $order,
+            function ($response) {
+                return (new ProductsMapper())->map(new Collections\Products(), $response);
+            }
+        );
+    }
+
+    public function findOneBy(array $criteria, string $orderBy = null, string $order = self::ORDER_BY_ASC): ? Product
+    {
+        return $this->doFindOneBy(
+            self::ENDPOINT,
+            $criteria,
+            $orderBy,
+            $order,
+            function ($response) {
+                return (new ProductsMapper())->map(new Collections\Products(), $response);
+            }
+        );
     }
 }

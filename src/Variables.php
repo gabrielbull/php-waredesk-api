@@ -39,13 +39,13 @@ class Variables extends Controller
         return $this->doDelete(self::ENDPOINT."/{$variable->getId()}");
     }
 
-    /**
-     * @return Collections\Variables|Variable[]
-     */
-    public function fetch(): Collections\Variables
+    public function fetch(string $orderBy = null, string $order = self::ORDER_BY_ASC, int $limit = null): Collections\Variables
     {
         return $this->doFetch(
             self::ENDPOINT,
+            $orderBy,
+            $order,
+            $limit,
             function ($response) {
                 return (new VariablesMapper())->map(new Collections\Variables(), $response);
             }
@@ -56,6 +56,19 @@ class Variables extends Controller
     {
         return $this->doFetchOne(
             self::ENDPOINT,
+            $orderBy,
+            $order,
+            function ($response) {
+                return (new VariablesMapper())->map(new Collections\Variables(), $response);
+            }
+        );
+    }
+
+    public function findOneBy(array $criteria, string $orderBy = null, string $order = self::ORDER_BY_ASC): ? Variable
+    {
+        return $this->doFindOneBy(
+            self::ENDPOINT,
+            $criteria,
             $orderBy,
             $order,
             function ($response) {
