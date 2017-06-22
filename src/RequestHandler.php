@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use Waredesk\Exceptions\UnknownException;
 
 class RequestHandler
@@ -19,14 +20,26 @@ class RequestHandler
     private $clientId;
     private $clientSecret;
     private $disabledAuthentication = false;
+    private $logger;
 
-    public function __construct(string $clientId, string $clientSecret, string $accessToken = null, string $apiUrl = null)
+    public function __construct(string $clientId, string $clientSecret, string $accessToken = null, string $apiUrl = null, LoggerInterface $logger = null)
     {
+        $this->logger = $logger;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->accessToken = $accessToken;
         $this->apiUrl = $apiUrl;
         $this->client = new Client(['base_uri' => $this->apiUrl, 'handler' => $this->mockHandler]);
+    }
+
+    public function getLogger(): ? LoggerInterface
+    {
+        return $this->logger;
+    }
+
+    public function setLogger(LoggerInterface $logger = null)
+    {
+        $this->logger = $logger;
     }
 
     public function disabledAuthentication()
@@ -135,30 +148,53 @@ class RequestHandler
     private function request(string $method, string $endpoint, array $headers = [], $params = null)
     {
         try {
+            $enhancedHeaders = $this->enhanceHeaders($headers);
+            $params = $this->encodeParams($params);
+            if ($this->logger) {
+                $this->logger->debug('REQUEST', [
+                    'method' => $method,
+                    'endpoint' => $endpoint,
+                    'header' => $enhancedHeaders,
+                    'body' => \GuzzleHttp\json_decode($params, true)
+                ]);
+            }
             $request = new GuzzleRequest(
                 $method,
                 $endpoint,
-                $this->enhanceHeaders($headers),
-                $this->encodeParams($params)
+                $enhancedHeaders,
+                $params
             );
             $response = $this->client->send($request);
+            if ($this->logger) {
+                $this->logger->debug('RESPONSE', [
+                    'method' => $method,
+                    'status' => $response->getStatusCode(),
+                    'endpoint' => $endpoint,
+                    'body' => \GuzzleHttp\json_decode((string)$response->getBody(), true)
+                ]);
+            }
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 399) {
-                /*if ($endpoint !== '/v1/authorize' && $method !== 'GET') {
-                    echo $method.PHP_EOL;
-                    echo $endpoint.PHP_EOL;
-                    $body = (string)$response->getBody();
-                    //$obj = \GuzzleHttp\json_decode($body);
-                    echo $body;
-                    die();
-                }*/
                 return \GuzzleHttp\json_decode((string)$response->getBody(), true);
             }
             $this->handleBadResponse($response);
         } catch (BadResponseException $e) {
-            /*$body = (string)$e->getResponse()->getBody();
-            echo $body;
-            die();*/
+            if ($this->logger) {
+                $this->logger->debug('RESPONSE', [
+                    'method' => $method,
+                    'status' => $e->getResponse()->getStatusCode(),
+                    'endpoint' => $endpoint,
+                    'body' => \GuzzleHttp\json_decode((string)$e->getResponse()->getBody(), true)
+                ]);
+            }
             $this->handleException($e);
+        }
+        if ($this->logger) {
+            $this->logger->debug('RESPONSE', [
+                'method' => $method,
+                'status' => null,
+                'endpoint' => $endpoint,
+                'body' => null
+            ]);
         }
         throw new UnknownException();
     }

@@ -15,7 +15,8 @@ This library is aimed at wrapping the Waredesk API into a simple to use PHP Libr
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-3. [License](#license)
+3. [Logging](#logging)
+4. [License](#license)
 
 <a name="requirements"></a>
 ## Requirements
@@ -34,6 +35,14 @@ run the Composer command to install the latest stable version of Waredesk:
 ```shell
 composer require waredesk/waredesk-api
 ```
+
+<a name="logging"></a>
+## Logging
+
+The Waredesk constructor takes a PSR-3 compatible logger.
+
+Requests & responses are logged at DEBUG level. At INFO level only the event is reported, not the response content. 
+More severe problems (e.g. no connection) are logged with higher severity.
 
 <a name="license"></a>
 ## License
