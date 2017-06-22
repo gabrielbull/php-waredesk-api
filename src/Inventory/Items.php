@@ -23,6 +23,17 @@ class Items extends Controller
         );
     }
 
+    public function batchCreate(array $items): Collections\Inventory\Items
+    {
+        return $this->doCreate(
+            self::ENDPOINT.'/batch',
+            $items,
+            function ($response) {
+                return (new ItemsMapper())->map(new Collections\Inventory\Items(), $response);
+            }
+        );
+    }
+
     public function delete(Item $item): bool
     {
         $this->validateIsNotNewEntity($item->getId());

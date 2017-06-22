@@ -1,0 +1,62 @@
+[
+  {
+    "id": "item_0C48a519563c419d4Pgo",
+    "warehouse": null,
+    "product": "pdct_0Bb142cf0a4292bewYB7",
+    "variant": "vrnt_0F71e9181492833do6hQ",
+    "activities": [
+      {
+        "id": "acti_0D574aa4aafaf42ayVoA",
+        "type": "Sale",
+        "note": "Sold to Jane Doe\nOrder ID: 203443",
+        "date": "2017-05-23T16:43:45+00:00",
+        "creation": "2017-06-21T11:58:43+00:00",
+        "modification": "2017-06-21T11:58:43+00:00"
+      }
+    ],
+    "attributes": [
+      {
+        "id": "itat_0F6bc7eaa1cd5a168hkv",
+        "item_attribute": "viat_1Dcaea6b9988c114KXwM",
+        "name": "Serial Number",
+        "value": "default value",
+        "creation": "2017-06-21T11:58:43+00:00",
+        "modification": "2017-06-21T11:58:43+00:00"
+      }
+    ],
+    "in_stock": true,
+    "note": null,
+    "creation": "2017-06-21T11:58:43+00:00",
+    "modification": "2017-06-21T11:58:43+00:00"
+  },
+  {
+    "id": "item_0C48a519563c419d4Pgo",
+    "warehouse": null,
+    "product": "pdct_0Bb142cf0a4292bewYB7",
+    "variant": "vrnt_0F71e9181492833do6hQ",
+    "activities": [
+      {
+        "id": "acti_0D574aa4aafaf42ayVoA",
+        "type": "Sale",
+        "note": "Sold to Jane Doe\nOrder ID: 203443",
+        "date": "2017-05-23T16:43:45+00:00",
+        "creation": "2017-06-21T11:58:43+00:00",
+        "modification": "2017-06-21T11:58:43+00:00"
+      }
+    ],
+    "attributes": [
+      {
+        "id": "itat_0F6bc7eaa1cd5a168hkv",
+        "item_attribute": "viat_1Dcaea6b9988c114KXwM",
+        "name": "Serial Number",
+        "value": "default value",
+        "creation": "2017-06-21T11:58:43+00:00",
+        "modification": "2017-06-21T11:58:43+00:00"
+      }
+    ],
+    "in_stock": true,
+    "note": null,
+    "creation": "2017-06-21T11:58:43+00:00",
+    "modification": "2017-06-21T11:58:43+00:00"
+  }
+]
