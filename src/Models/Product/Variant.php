@@ -27,7 +27,7 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
     private $items_attributes;
     private $name;
     private $description;
-    private $notes;
+    private $note;
     private $weight_unit = self::WEIGHT_UNIT_METRIC;
     private $length_unit = self::LENGTH_UNIT_METRIC;
     private $weight;
@@ -102,9 +102,9 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
         return $this->description;
     }
 
-    public function getNotes(): ? string
+    public function getNote(): ? string
     {
-        return $this->notes;
+        return $this->note;
     }
 
     public function getWeightUnit(): ? string
@@ -178,8 +178,8 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
                     case 'description':
                         $this->description = $value;
                         break;
-                    case 'notes':
-                        $this->notes = $value;
+                    case 'note':
+                        $this->note = $value;
                         break;
                     case 'weight_unit':
                         $this->weight_unit = $value;
@@ -230,9 +230,9 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
         $this->description = $description;
     }
 
-    public function setNotes(string $notes = null)
+    public function setNote(string $note = null)
     {
-        $this->notes = $notes;
+        $this->note = $note;
     }
 
     public function setWeightUnit(string $weight_unit = null)
@@ -274,7 +274,7 @@ class Variant implements Entity, ReplaceableEntity, JsonSerializable
             'items_attributes' => $this->getItemsAttributes()->jsonSerialize(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
-            'notes' => $this->getNotes(),
+            'note' => $this->getNote(),
             'weight_unit' => $this->getWeightUnit(),
             'length_unit' => $this->getLengthUnit(),
             'weight' => $this->getWeight(),

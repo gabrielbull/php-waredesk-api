@@ -18,7 +18,7 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
     private $variants;
     private $name;
     private $description;
-    private $notes;
+    private $note;
     private $creation;
     private $modification;
 
@@ -75,9 +75,9 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
         return $this->description;
     }
 
-    public function getNotes(): ? string
+    public function getNote(): ? string
     {
-        return $this->notes;
+        return $this->note;
     }
 
     public function getCreation(): ?DateTime
@@ -115,8 +115,8 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
                     case 'description':
                         $this->description = $value;
                         break;
-                    case 'notes':
-                        $this->notes = $value;
+                    case 'note':
+                        $this->note = $value;
                         break;
                     case 'creation':
                         $this->creation = $value;
@@ -149,9 +149,9 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
         $this->description = $description;
     }
 
-    public function setNotes(string $notes = null)
+    public function setNote(string $note = null)
     {
-        $this->notes = $notes;
+        $this->note = $note;
     }
 
     public function jsonSerialize(): array
@@ -161,7 +161,7 @@ class Product implements Entity, ReplaceableEntity, JsonSerializable
             'variants' => $this->getVariants()->jsonSerialize(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
-            'notes' => $this->getNotes(),
+            'note' => $this->getNote(),
         ];
         if ($this->pendingImage) {
             $returnValue['image'] = $this->pendingImage->toBase64();

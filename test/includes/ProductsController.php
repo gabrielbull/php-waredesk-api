@@ -108,7 +108,7 @@ class ProductsController
                 return false;
             } elseif ($variant->getDescription() !== null) {
                 return false;
-            } elseif ($variant->getNotes() !== null) {
+            } elseif ($variant->getNote() !== null) {
                 return false;
             } elseif ($variant->getWeightUnit() !== 'metric') {
                 return false;
@@ -127,7 +127,7 @@ class ProductsController
         if ($product->getDescription() !== 'This T-Shirt will cover your belly') {
             return false;
         }
-        if ($product->getNotes() !== null) {
+        if ($product->getNote() !== null) {
             return false;
         }
         return true;

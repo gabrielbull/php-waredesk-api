@@ -31,7 +31,7 @@
       "items_attributes": [],
       "name": "X-Large",
       "description": null,
-      "notes": null,
+      "note": null,
       "weight_unit": "imperial",
       "length_unit": "imperial",
       "weight": null,
@@ -44,7 +44,7 @@
   ],
   "name": "Amazing T-Shirt",
   "description": "This T-Shirt will cover your belly",
-  "notes": null,
+  "note": null,
   "creation": "2017-05-15T20:42:37+00:00",
   "modification": "2017-05-15T20:42:37+00:00"
 }
